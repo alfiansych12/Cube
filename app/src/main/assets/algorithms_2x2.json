@@ -1,0 +1,422 @@
+{
+  "version": 1,
+  "cube": "2x2",
+  "methods": [
+    {
+      "id": "ortega",
+      "name": "Metode Ortega",
+      "difficulty": "Menengah (Sub-5 Detik)",
+      "description": "Metode paling populer untuk speedcuber 2x2. Terdiri dari 3 langkah cepat: First Face (satu warna saja), OLL (orientasi kuning), dan PBL (menyelesaikan kedua layer secara bersamaan).",
+      "steps": [
+        "Langkah 1: Selesaikan satu sisi pertama (warna sama di satu sisi, tidak harus satu layer penuh).",
+        "Langkah 2: OLL - Orientasikan sisi kuning di atas dengan 1 dari 7 rumus.",
+        "Langkah 3: PBL - Selesaikan posisi kedua layer secara simultan dengan 1 dari 5 rumus."
+      ]
+    },
+    {
+      "id": "cll",
+      "name": "Metode CLL (Corners of Last Layer)",
+      "difficulty": "Lanjutan (Sub-3 Detik)",
+      "description": "Metode tingkat lanjut di mana layer bawah diselesaikan secara sempurna terlebih dahulu (First Layer). Kemudian layer atas diselesaikan (orientasi dan permutasi sekaligus) dalam satu rumus dari 42 kasus.",
+      "steps": [
+        "Langkah 1: Selesaikan layer pertama secara sempurna (warna atas dan samping cocok).",
+        "Langkah 2: Kenali pola warna pada sudut layer atas.",
+        "Langkah 3: Eksekusi rumus CLL yang tepat untuk langsung menyelesaikan kubus!"
+      ]
+    },
+    {
+      "id": "eg1",
+      "name": "Metode EG-1 (Erik-Gunnar 1)",
+      "difficulty": "Profesional (Sub-2 Detik)",
+      "description": "Metode elit dunia speedcubing. Digunakan ketika face pertama selesai namun memiliki sepasang balok bersebelahan (adjacent swap). Algoritma menyelesaikan permutasi atas dan bawah sekaligus.",
+      "steps": [
+        "Langkah 1: Buat face dasar dengan 1 pasang blok sejajar (Adjacent swap).",
+        "Langkah 2: Identifikasi kasus sudut atas relatif terhadap bar di bawah.",
+        "Langkah 3: Eksekusi rumus EG-1 dalam satu hembusan untuk 1-look solve!"
+      ]
+    },
+    {
+      "id": "lbl",
+      "name": "Metode LBL (Pemula / Layer by Layer)",
+      "difficulty": "Pemula",
+      "description": "Metode bertahap yang paling mudah dipelajari oleh siapapun yang baru mulai bermain Rubik 2x2. Logika pergerakan sangat mirip dengan Rubik 3x3 standar.",
+      "steps": [
+        "Langkah 1: Selesaikan Layer Pertama secara lengkap (putih di bawah, samping seragam).",
+        "Langkah 2: OLL Pemula (buat seluruh sisi atas berwarna kuning).",
+        "Langkah 3: PLL Pemula (pindahkan sudut atas ke tempat yang tepat)."
+      ]
+    }
+  ],
+  "algorithms": [
+    {
+      "id": "ortega_oll_sune",
+      "methodId": "ortega",
+      "group": "OLL (Orientasi)",
+      "name": "OLL 1 - Sune",
+      "notation": "R U R' U R U2 R'",
+      "setupMoves": "R U2 R' U' R U' R'",
+      "description": "Satu sudut kuning sudah menghadap ke atas di posisi depan-kiri. Sudut depan-kanan menghadap ke depan.",
+      "fingerTricks": "Gunakan telunjuk kanan untuk U dan double-flick telunjuk+tengah untuk U2."
+    },
+    {
+      "id": "ortega_oll_antisune",
+      "methodId": "ortega",
+      "group": "OLL (Orientasi)",
+      "name": "OLL 2 - Anti-Sune",
+      "notation": "R U2 R' U' R U' R'",
+      "setupMoves": "R U R' U R U2 R'",
+      "description": "Satu sudut kuning menghadap ke atas di posisi belakang-kanan. Sudut depan-kanan menghadap ke kanan.",
+      "fingerTricks": "Double flick U2 di awal dengan tangan kanan, lanjutkan regrip minimal."
+    },
+    {
+      "id": "ortega_oll_h",
+      "methodId": "ortega",
+      "group": "OLL (Orientasi)",
+      "name": "OLL 3 - H (Double Sune)",
+      "notation": "R2 U2 R U2 R2",
+      "setupMoves": "R2 U2 R' U2 R2",
+      "description": "Tidak ada sudut kuning menghadap ke atas. Dua sudut menghadap ke depan, dua sudut menghadap ke belakang.",
+      "fingerTricks": "Pegang cube dengan mantap, lakukan R2 dari pergelangan lalu double-flick U2."
+    },
+    {
+      "id": "ortega_oll_pi",
+      "methodId": "ortega",
+      "group": "OLL (Orientasi)",
+      "name": "OLL 4 - Pi",
+      "notation": "F R U R' U' R U R' U' F'",
+      "setupMoves": "F U R U' R' U R U' R' F'",
+      "description": "Tidak ada kuning di atas. Dua kuning menghadap ke belakang, satu kuning ke kiri, satu kuning ke kanan.",
+      "fingerTricks": "Buka dengan F menggunakan telunjuk kanan, lakukan sexy move (R U R' U') 2 kali, tutup dengan F'."
+    },
+    {
+      "id": "ortega_oll_t",
+      "methodId": "ortega",
+      "group": "OLL (Orientasi)",
+      "name": "OLL 5 - T",
+      "notation": "R U R' U' R' F R F'",
+      "setupMoves": "F R' F' R U R U' R'",
+      "description": "Dua sudut kuning menghadap ke atas (sebelahan). Dua lainnya saling membelakangi (satu ke kiri, satu ke kanan).",
+      "fingerTricks": "Kombinasi sexy move diikuti sledgehammer (R' F R F'). Sangat cepat dieksekusi!"
+    },
+    {
+      "id": "ortega_oll_u",
+      "methodId": "ortega",
+      "group": "OLL (Orientasi)",
+      "name": "OLL 6 - U (Headlights)",
+      "notation": "F R U R' U' F'",
+      "setupMoves": "F R U R' U' F'",
+      "description": "Dua sudut kuning menghadap ke atas (sebelahan). Dua sudut lainnya menghadap bersamaan ke depan (lampu mobil).",
+      "fingerTricks": "Buka F dengan telunjuk kanan, lakukan 1 kali sexy move (R U R' U'), lalu tutup F' dengan jempol."
+    },
+    {
+      "id": "ortega_oll_l",
+      "methodId": "ortega",
+      "group": "OLL (Orientasi)",
+      "name": "OLL 7 - L (Bowtie)",
+      "notation": "F R' F' R U R U' R'",
+      "setupMoves": "R U R' U' R' F R F'",
+      "description": "Dua sudut kuning di atas berseberangan diagonal. Satu kuning menghadap ke depan, satu menghadap ke kanan.",
+      "fingerTricks": "Sledgehammer terbalik (F R' F' R) lalu sambung dengan R U R' U'."
+    },
+    {
+      "id": "ortega_pbl_adj_adj",
+      "methodId": "ortega",
+      "group": "PBL (Permutasi)",
+      "name": "PBL 1 - Bar Atas & Bar Bawah",
+      "notation": "R2 U' B2 U2 R2 U' R2",
+      "setupMoves": "R2 U R2 U2 B2 U R2",
+      "description": "Terdapat satu bar (warna sama bersebelahan) di layer atas dan satu bar di layer bawah. Sejajarkan kedua bar di sisi depan.",
+      "fingerTricks": "Gunakan jari manis untuk B2, dan pertahankan ibu jari di layer depan."
+    },
+    {
+      "id": "ortega_pbl_diag_diag",
+      "methodId": "ortega",
+      "group": "PBL (Permutasi)",
+      "name": "PBL 2 - Diagonal Atas & Diagonal Bawah",
+      "notation": "R2 F2 R2",
+      "setupMoves": "R2 F2 R2",
+      "description": "Tidak ada bar sama sekali baik di layer atas maupun layer bawah (keduanya diagonal swap). Kasus tercepat di Ortega!",
+      "fingerTricks": "Hanya 3 gerakan! R2 dengan pergelangan, F2 dengan dua jari, dan R2 penutup."
+    },
+    {
+      "id": "ortega_pbl_adj_solved",
+      "methodId": "ortega",
+      "group": "PBL (Permutasi)",
+      "name": "PBL 3 - Bar Atas (Bawah Selesai)",
+      "notation": "R U R' U' R' F R2 U' R' U' R U R' F'",
+      "setupMoves": "F R U' R' U R U R2 F' R U R U' R'",
+      "description": "Layer bawah sudah selesai penuh. Layer atas memiliki 1 bar (T-Perm standard). Letakkan bar di sisi kiri.",
+      "fingerTricks": "Algoritma T-Perm standar 3x3 yang sangat terkenal dan nyaman."
+    },
+    {
+      "id": "ortega_pbl_diag_solved",
+      "methodId": "ortega",
+      "group": "PBL (Permutasi)",
+      "name": "PBL 4 - Diagonal Atas (Bawah Selesai)",
+      "notation": "F R U' R' U' R U R' F' R U R' U' R' F R F'",
+      "setupMoves": "F R' F' R U R U' R' F R U' R' U R U R' F'",
+      "description": "Layer bawah sudah selesai. Layer atas perlu diagonal swap (Y-Perm standard).",
+      "fingerTricks": "Y-Perm: Mulai dengan F R U' R' lalu transisi ke sexy move dan sledgehammer."
+    },
+    {
+      "id": "ortega_pbl_solved_adj",
+      "methodId": "ortega",
+      "group": "PBL (Permutasi)",
+      "name": "PBL 5 - Atas Selesai (Bar Bawah)",
+      "notation": "R U' R F2 R' U R'",
+      "setupMoves": "R U' R F2 R' U R'",
+      "description": "Layer atas sudah selesai penuh. Layer bawah memiliki 1 bar. Letakkan bar bawah di sisi depan.",
+      "fingerTricks": "Rumus sangat pendek dan ergonomis untuk menyudahi solve."
+    },
+    {
+      "id": "ortega_pbl_solved_diag",
+      "methodId": "ortega",
+      "group": "PBL (Permutasi)",
+      "name": "PBL 6 - Atas Selesai (Diagonal Bawah)",
+      "notation": "R' U R' F2 R F' R",
+      "setupMoves": "R' F R' F2 R U' R",
+      "description": "Layer atas sudah selesai penuh. Layer bawah tidak ada bar (diagonal swap).",
+      "fingerTricks": "Tarik R' dengan lembut, lalu putar F2 dengan jari depan."
+    },
+    {
+      "id": "cll_sune_1",
+      "methodId": "cll",
+      "group": "CLL - Sune",
+      "name": "CLL Sune 1 (Pure)",
+      "notation": "R U R' U R U2 R'",
+      "setupMoves": "R U2 R' U' R U' R'",
+      "description": "Sune murni: orientasi sune dengan semua warna samping terorientasi simetris.",
+      "fingerTricks": "Eksekusi klasik Sune dengan ritme stabil."
+    },
+    {
+      "id": "cll_sune_2",
+      "methodId": "cll",
+      "group": "CLL - Sune",
+      "name": "CLL Sune 2 (Bar Front)",
+      "notation": "F R U R' U' F' R U R' U' R' F R F'",
+      "setupMoves": "F R' F' R U R U' R' F U R U' R' F'",
+      "description": "Sune dengan bar samping menghadap ke depan.",
+      "fingerTricks": "Kombinasi OLL U + T-perm Sledge."
+    },
+    {
+      "id": "cll_sune_3",
+      "methodId": "cll",
+      "group": "CLL - Sune",
+      "name": "CLL Sune 3 (Slash)",
+      "notation": "R U R' U' R' F R F' R U R' U R U2 R'",
+      "setupMoves": "R U2 R' U' R U' R' F R' F' R U R U' R'",
+      "description": "Sune dengan warna samping bersilangan diagonal (slash).",
+      "fingerTricks": "Sexy move + Sledgehammer lalu Sune."
+    },
+    {
+      "id": "cll_antisune_1",
+      "methodId": "cll",
+      "group": "CLL - Anti-Sune",
+      "name": "CLL Anti-Sune 1 (Pure)",
+      "notation": "R U2 R' U' R U' R'",
+      "setupMoves": "R U R' U R U2 R'",
+      "description": "Anti-sune murni tanpa permutasi sudut tambahan.",
+      "fingerTricks": "Double flick U2 di awal."
+    },
+    {
+      "id": "cll_antisune_2",
+      "methodId": "cll",
+      "group": "CLL - Anti-Sune",
+      "name": "CLL Anti-Sune 2 (Bar Back)",
+      "notation": "R' U' R U' R' U2 R",
+      "setupMoves": "R' U2 R U R' U R",
+      "description": "Anti-sune kiri / mirror untuk bar di belakang.",
+      "fingerTricks": "Eksekusi tangan kanan dengan putaran inverse."
+    },
+    {
+      "id": "cll_h_1",
+      "methodId": "cll",
+      "group": "CLL - H",
+      "name": "CLL H 1 (Columns)",
+      "notation": "R2 U2 R U2 R2",
+      "setupMoves": "R2 U2 R' U2 R2",
+      "description": "Dua bar berlawanan di depan dan belakang dengan kolom samping seragam.",
+      "fingerTricks": "Eksekusi cepat dalam kurang dari 0.8 detik."
+    },
+    {
+      "id": "cll_h_2",
+      "methodId": "cll",
+      "group": "CLL - H",
+      "name": "CLL H 2 (Rows)",
+      "notation": "F R U R' U' R U R' U' F'",
+      "setupMoves": "F U R U' R' U R U' R' F'",
+      "description": "Dua bar depan dan belakang dengan warna samping berpasangan.",
+      "fingerTricks": "Double sexy move di dalam kurung F dan F'."
+    },
+    {
+      "id": "cll_pi_1",
+      "methodId": "cll",
+      "group": "CLL - Pi",
+      "name": "CLL Pi 1 (Slash)",
+      "notation": "R U2 R2 U' R2 U' R2 U2 R",
+      "setupMoves": "R' U2 R2 U R2 U R2 U2 R'",
+      "description": "Kasus Pi dengan bar kuning di belakang dan warna samping diagonal.",
+      "fingerTricks": "R2 dominan dengan flick U dan U2."
+    },
+    {
+      "id": "cll_t_1",
+      "methodId": "cll",
+      "group": "CLL - T",
+      "name": "CLL T 1 (Pure Sledge)",
+      "notation": "R U R' U' R' F R F'",
+      "setupMoves": "F R' F' R U R U' R'",
+      "description": "Bentuk T dengan bar samping sejajar. Cukup satu sexy move dan sledgehammer.",
+      "fingerTricks": "Rumus dasar paling penting di speedcubing."
+    },
+    {
+      "id": "cll_u_1",
+      "methodId": "cll",
+      "group": "CLL - U",
+      "name": "CLL U 1 (Headlights)",
+      "notation": "F R U R' U' F'",
+      "setupMoves": "F R U R' U' F'",
+      "description": "Headlights kuning di depan dengan balok samping berpasangan.",
+      "fingerTricks": "Satu gerakan membuka F, 1 sexy move, 1 gerakan penutup F'."
+    },
+    {
+      "id": "cll_l_1",
+      "methodId": "cll",
+      "group": "CLL - L",
+      "name": "CLL L 1 (Bowtie Pure)",
+      "notation": "F R' F' R U R U' R'",
+      "setupMoves": "R U R' U' R' F R F'",
+      "description": "Bentuk pita (bowtie) dengan warna samping simetris.",
+      "fingerTricks": "Sledgehammer lalu R U R' U'."
+    },
+    {
+      "id": "eg1_sune_1",
+      "methodId": "eg1",
+      "group": "EG-1 - Sune",
+      "name": "EG-1 Sune 1",
+      "notation": "R U' R' F' R U R'",
+      "setupMoves": "R U' R' F R U R'",
+      "description": "Layer bawah adjacent swap, layer atas pola Sune. Selesaikan dalam 1 langkah!",
+      "fingerTricks": "Tangan kanan mengalir tanpa regrip."
+    },
+    {
+      "id": "eg1_antisune_1",
+      "methodId": "eg1",
+      "group": "EG-1 - Anti-Sune",
+      "name": "EG-1 Anti-Sune 1",
+      "notation": "R' F R2 U' R2 F R",
+      "setupMoves": "R' F' R2 U R2 F' R",
+      "description": "Layer bawah adjacent swap, layer atas pola Anti-Sune.",
+      "fingerTricks": "Flick F dengan telunjuk lalu R2 dengan pergelangan."
+    },
+    {
+      "id": "eg1_h_1",
+      "methodId": "eg1",
+      "group": "EG-1 - H",
+      "name": "EG-1 H 1",
+      "notation": "R2 U' R2 U2 F2 U' R2",
+      "setupMoves": "R2 U F2 U2 R2 U R2",
+      "description": "Layer bawah adjacent swap, layer atas orientasi H.",
+      "fingerTricks": "Kombinasi R2, U2, dan F2 bertenaga tinggi."
+    },
+    {
+      "id": "eg1_t_1",
+      "methodId": "eg1",
+      "group": "EG-1 - T",
+      "name": "EG-1 T 1",
+      "notation": "R U R' U' R' F R2 U' R'",
+      "setupMoves": "R U R2 F' R U R U' R'",
+      "description": "Layer bawah adjacent swap, layer atas orientasi T.",
+      "fingerTricks": "Sexy move dilanjutkan modifikasi T-perm."
+    },
+    {
+      "id": "lbl_step1_corner",
+      "methodId": "lbl",
+      "group": "Langkah 1: Layer Bawah",
+      "name": "Memasukkan Sudut Putih",
+      "notation": "R U R' U'",
+      "setupMoves": "U R U' R'",
+      "description": "Ulangi sexy move (R U R' U') 1, 3, atau 5 kali hingga sudut putih masuk dengan benar menghadap ke bawah.",
+      "fingerTricks": "Gunakan telunjuk kanan untuk U dan tarik R' ke bawah dengan pergelangan tangan."
+    },
+    {
+      "id": "lbl_step2_oll",
+      "methodId": "lbl",
+      "group": "Langkah 2: OLL Pemula",
+      "name": "Orientasi Sudut Kuning (Sune)",
+      "notation": "R U R' U R U2 R'",
+      "setupMoves": "R U2 R' U' R U' R'",
+      "description": "Rumus wajib pemula untuk membuat seluruh sisi atas berwarna kuning, apapun kasus awalnya.",
+      "fingerTricks": "Double flick telunjuk dan jari tengah untuk U2."
+    },
+    {
+      "id": "lbl_step3_pll_t",
+      "methodId": "lbl",
+      "group": "Langkah 3: PLL Pemula",
+      "name": "T-Perm (Tukar 2 Sudut Sebelahan)",
+      "notation": "R U R' U' R' F R2 U' R' U' R U R' F'",
+      "setupMoves": "F R U' R' U R U R2 F' R U R U' R'",
+      "description": "Jika ada 1 bar sisi sama di atas, letakkan di kiri lalu jalankan rumus ini untuk menyelesaikan kubus!",
+      "fingerTricks": "Rumus paling terkenal di dunia Rubik."
+    },
+    {
+      "id": "lbl_step3_pll_y",
+      "methodId": "lbl",
+      "group": "Langkah 3: PLL Pemula",
+      "name": "Y-Perm (Tukar Sudut Diagonal)",
+      "notation": "F R U' R' U' R U R' F' R U R' U' R' F R F'",
+      "setupMoves": "F R' F' R U R U' R' F R U' R' U R U R' F'",
+      "description": "Jika tidak ada bar sama sekali di layer atas, jalankan rumus ini dari sisi mana saja untuk menyelesaikan kubus!",
+      "fingerTricks": "Kombinasi F setup, R U' R', sexy move, dan sledgehammer."
+    }
+  ],
+  "roadmaps": [
+    {
+      "cube": "3x3",
+      "name": "3x3 Rubik's Cube",
+      "tagline": "Standar Dunia Speedcubing",
+      "difficulty": "Menengah",
+      "methods": [
+        {
+          "name": "CFOP (Fridrich)",
+          "stages": ["Cross (Palang Putih)", "F2L (First Two Layers - 41 Kasus)", "OLL (Orientasi Kuning - 57 Kasus)", "PLL (Permutasi Sudut & Edge - 21 Kasus)"]
+        },
+        {
+          "name": "Roux",
+          "stages": ["First Block 1x2x3", "Second Block 1x2x3", "CMLL (Corners of Last Layer)", "LSE (Last Six Edges)"]
+        },
+        {
+          "name": "Pemula (Layer by Layer)",
+          "stages": ["Daisy & White Cross", "First Layer Corners", "Second Layer Edges", "Yellow Cross", "Yellow Edges Alignment", "Corner Placement", "Corner Orientation"]
+        }
+      ]
+    },
+    {
+      "cube": "4x4",
+      "name": "4x4 Rubik's Revenge",
+      "tagline": "Tantangan Big Cube Pertama & Paritas",
+      "difficulty": "Lanjutan",
+      "methods": [
+        {
+          "name": "Yau Method",
+          "stages": ["2 Centers Pertama (Putih & Kuning)", "3 White Cross Edges", "4 Sisa Centers", "Last Cross Edge", "Edge Pairing 3-2-3", "3x3 Stage", "OLL & PLL Parity"]
+        },
+        {
+          "name": "Reduction (Redux)",
+          "stages": ["Selesaikan 6 Center (4 blok tengah per sisi)", "Pairing 12 pasang Edges (Freeslice)", "Selesaikan seperti kubus 3x3", "Atasi OLL Parity (Rw U2 x Rw U2 Rw U2...) & PLL Parity (2R2 U2 2R2 u2 2R2 2u2)"]
+        }
+      ]
+    },
+    {
+      "cube": "5x5",
+      "name": "5x5 Professor's Cube",
+      "tagline": "Puncak Strategi Big Cube Simetris",
+      "difficulty": "Master",
+      "methods": [
+        {
+          "name": "Reduction Method (5x5)",
+          "stages": ["Buat bar tengah 1x3 lalu ekspansi ke 3x3 center", "Pairing Tredges (Trio Edge 1x3) menggunakan teknik slice-flip-slice", "Last 2 Edges (L2E Parity)", "Selesaikan fase 3x3 murni tanpa paritas PLL!"]
+        }
+      ]
+    }
+  ]
+}

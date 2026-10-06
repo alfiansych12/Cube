@@ -1,0 +1,1337 @@
+{
+  "version": 2,
+  "cube": "3x3",
+  "methods": [
+    {
+      "id": "cfop",
+      "name": "Metode CFOP (Fridrich)",
+      "difficulty": "Lanjutan (Speedcubing)",
+      "description": "Metode terlengkap resmi WCA speedcubing 3x3: Full F2L (41 rumus), Full OLL (57 rumus), dan Full PLL (21 rumus) dengan panduan animasi 3D interaktif.",
+      "steps": [
+        "1. Cross: Bentuk palang putih di sisi bawah (Down).",
+        "2. F2L (First Two Layers): Selesaikan 4 pasang sudut dan edge sekaligus (41 Kasus).",
+        "3. OLL (Orientation of Last Layer): Buat seluruh permukaan atas menjadi kuning (57 Kasus).",
+        "4. PLL (Permutation of Last Layer): Pindahkan kepingan layer atas ke posisi yang tepat (21 Kasus)."
+      ]
+    },
+    {
+      "id": "lbl_3x3",
+      "name": "Metode Pemula (LBL)",
+      "difficulty": "Pemula",
+      "description": "Metode paling ramah dan mudah dipelajari untuk siapapun yang baru pertama kali ingin menyelesaikan kubus Rubik 3x3. Dibagi menjadi 7 tahapan intuitif selangkah demi selangkah.",
+      "steps": [
+        "Langkah 1: Buat Daisy (bunga aster) lalu turunkan membentuk White Cross sempurna.",
+        "Langkah 2: Selesaikan sudut layer pertama dengan sexy move (R U R' U').",
+        "Langkah 3: Masukkan 4 edge layer kedua menggunakan rumus kanan/kiri.",
+        "Langkah 4: Buat palang kuning di atas menggunakan rumus F R U R' U' F'.",
+        "Langkah 5: Samakan warna samping palang kuning dengan rumus Sune.",
+        "Langkah 6: Posisikan 4 sudut kuning ke tempat yang benar dengan rumus Niklas.",
+        "Langkah 7: Putar sudut kuning menghadap ke atas dengan R' D' R D hingga solved!"
+      ]
+    },
+    {
+      "id": "roux",
+      "name": "Metode Roux",
+      "difficulty": "Lanjutan",
+      "description": "Metode speedcubing alternatif tanpa rotasi kubus (rotationless) yang sangat hemat gerakan (move-count efisien ~48 gerakan). Mengandalkan pembangunan blok dan putaran layer tengah (M-slice).",
+      "steps": [
+        "Step 1: Bangun First Block (FB) 1x2x3 di sisi kiri.",
+        "Step 2: Bangun Second Block (SB) 1x2x3 di sisi kanan menggunakan bantuan slice M dan r.",
+        "Step 3: CMLL - Selesaikan 4 sudut layer atas sekaligus dalam 1 rumus.",
+        "Step 4: LSE - Selesaikan 6 edge terakhir (orientasi EO, letakkan UL/UR, selesaikan 4 edge M)."
+      ]
+    }
+  ],
+  "algorithms": [
+    {
+      "id": "3x3_f2l_1",
+      "methodId": "cfop",
+      "group": "F2L",
+      "name": "F2L 1 - Basic Insert Kanan",
+      "notation": "U R U' R'",
+      "setupMoves": "R U R' U'",
+      "description": "Pasangan sudah terbentuk di layer atas, masukkan ke slot kanan.",
+      "fingerTricks": "U flick kanan, R angkat, U' tarik kiri, R' turunkan."
+    },
+    {
+      "id": "3x3_f2l_2",
+      "methodId": "cfop",
+      "group": "F2L",
+      "name": "F2L 2 - Basic Insert Kiri",
+      "notation": "U' L' U L",
+      "setupMoves": "L' U' L U",
+      "description": "Pasangan sudah terbentuk di layer atas, masukkan ke slot kiri.",
+      "fingerTricks": "U' flick kiri, L' angkat, U tarik kanan, L turunkan."
+    },
+    {
+      "id": "3x3_f2l_3",
+      "methodId": "cfop",
+      "group": "F2L",
+      "name": "F2L 3 - Basic Insert Belakang Kanan",
+      "notation": "U' R' U R",
+      "setupMoves": "R' U' R U",
+      "description": "Pasangan sudut-edge dimasukkan ke slot belakang kanan.",
+      "fingerTricks": "U' flick kiri, R' putar belakang, U tarik, R kembalikan."
+    },
+    {
+      "id": "3x3_f2l_4",
+      "methodId": "cfop",
+      "group": "F2L",
+      "name": "F2L 4 - Basic Insert Belakang Kiri",
+      "notation": "U L U' L'",
+      "setupMoves": "L U L' U'",
+      "description": "Pasangan sudut-edge dimasukkan ke slot belakang kiri.",
+      "fingerTricks": "U flick kanan, L putar belakang, U' tarik, L' kembalikan."
+    },
+    {
+      "id": "3x3_f2l_5",
+      "methodId": "cfop",
+      "group": "F2L",
+      "name": "F2L 5 - Corner Putih Kanan, Pisah",
+      "notation": "U' R U R' U2 R U' R'",
+      "setupMoves": "R U R' U2 R U' R' U",
+      "description": "Corner putih menghadap kanan, pisahkan lalu pasangkan.",
+      "fingerTricks": "Pisahkan pasangan dengan U' R U R' lalu insert."
+    },
+    {
+      "id": "3x3_f2l_6",
+      "methodId": "cfop",
+      "group": "F2L",
+      "name": "F2L 6 - Corner Putih Depan, Pisah",
+      "notation": "d R' U' R U2 R' U R",
+      "setupMoves": "R' U' R U2 R' U R d'",
+      "description": "Corner putih menghadap depan, pisahkan lalu pasangkan.",
+      "fingerTricks": "Rotasi d ke kanan, pisahkan, lalu selesaikan."
+    },
+    {
+      "id": "3x3_f2l_7",
+      "methodId": "cfop",
+      "group": "F2L",
+      "name": "F2L 7 - Warna Sama, Pisah Kanan",
+      "notation": "R U' R' U2 R U R'",
+      "setupMoves": "R U' R' U2 R U R'",
+      "description": "Warna stiker atas sama, pisahkan dan pasangkan ke slot.",
+      "fingerTricks": "Gunakan R U' R' untuk memisahkan corner dan edge."
+    },
+    {
+      "id": "3x3_f2l_8",
+      "methodId": "cfop",
+      "group": "F2L",
+      "name": "F2L 8 - Warna Sama, Pisah Kiri",
+      "notation": "y' R' U R U2 R' U' R y",
+      "setupMoves": "y' R' U R U2 R' U' R y",
+      "description": "Warna stiker atas sama untuk slot kiri.",
+      "fingerTricks": "Eksekusi dari orientasi samping kiri."
+    },
+    {
+      "id": "3x3_f2l_9",
+      "methodId": "cfop",
+      "group": "F2L",
+      "name": "F2L 9 - Warna Beda, Putih Kanan",
+      "notation": "R U R' U2 R U' R'",
+      "setupMoves": "R U R' U2 R U' R'",
+      "description": "Warna stiker atas berbeda, sudut putih di samping kanan.",
+      "fingerTricks": "Bentuk pasangan di U layer lalu selesaikan."
+    },
+    {
+      "id": "3x3_f2l_10",
+      "methodId": "cfop",
+      "group": "F2L",
+      "name": "F2L 10 - Warna Beda, Putih Depan",
+      "notation": "y' R' U' R U2 R' U R y",
+      "setupMoves": "y' R' U' R U2 R' U R y",
+      "description": "Warna stiker atas berbeda, sudut putih di depan.",
+      "fingerTricks": "Gunakan variasi slot kiri untuk insert cepat."
+    },
+    {
+      "id": "3x3_f2l_11",
+      "methodId": "cfop",
+      "group": "F2L",
+      "name": "F2L 11 - Warna Sama, Terbalik",
+      "notation": "U' R U2 R' U2 R U' R'",
+      "setupMoves": "R U R' U2 R U2 R' U",
+      "description": "Pasangan terbalik dengan warna atas sama.",
+      "fingerTricks": "Double U flick U2 untuk mengatur jarak kepingan."
+    },
+    {
+      "id": "3x3_f2l_12",
+      "methodId": "cfop",
+      "group": "F2L",
+      "name": "F2L 12 - Warna Beda, Terbalik",
+      "notation": "d R' U2 R U2 R' U R",
+      "setupMoves": "R' U' R U2 R' U2 R d'",
+      "description": "Pasangan terbalik dengan warna atas berbeda.",
+      "fingerTricks": "Rotasi d lalu U2 ganda untuk menggabungkan."
+    },
+    {
+      "id": "3x3_f2l_13",
+      "methodId": "cfop",
+      "group": "F2L",
+      "name": "F2L 13 - Pasangan Terbalik, Edge Belakang",
+      "notation": "U' R U' R' U R U R'",
+      "setupMoves": "R' U' R' U' R U R' U",
+      "description": "Edge di posisi belakang, sudut di depan kanan.",
+      "fingerTricks": "R U' R' lalu R U R' bertahap."
+    },
+    {
+      "id": "3x3_f2l_14",
+      "methodId": "cfop",
+      "group": "F2L",
+      "name": "F2L 14 - Pasangan Terbalik, Edge Kiri",
+      "notation": "d R' U R U' R' U' R",
+      "setupMoves": "R' U R U R' U' R d'",
+      "description": "Edge di posisi kiri, gabungkan dengan rotasi d.",
+      "fingerTricks": "Gunakan rotasi d halus untuk kelancaran."
+    },
+    {
+      "id": "3x3_f2l_15",
+      "methodId": "cfop",
+      "group": "F2L",
+      "name": "F2L 15 - Putih Atas, Cocokkan Kanan",
+      "notation": "R U2 R' U' R U R'",
+      "setupMoves": "R' U' R U R U2 R'",
+      "description": "Stiker putih corner menghadap ke atas, pasangkan ke edge.",
+      "fingerTricks": "R U2 R' putar corner dua langkah lalu pasangkan."
+    },
+    {
+      "id": "3x3_f2l_16",
+      "methodId": "cfop",
+      "group": "F2L",
+      "name": "F2L 16 - Putih Atas, Cocokkan Kiri",
+      "notation": "y' R' U2 R U R' U' R y",
+      "setupMoves": "y' R' U R U' R' U2 R y",
+      "description": "Stiker putih corner menghadap ke atas untuk slot kiri.",
+      "fingerTricks": "Versi cermin dari F2L 15."
+    },
+    {
+      "id": "3x3_f2l_17",
+      "methodId": "cfop",
+      "group": "F2L",
+      "name": "F2L 17 - Putih Atas, Jarak 1",
+      "notation": "U2 R U R' U R U' R'",
+      "setupMoves": "R U R' U' R U' R' U2",
+      "description": "Corner putih di atas, edge berjarak 1 putaran U.",
+      "fingerTricks": "U2 lalu sexy move insert R U R'."
+    },
+    {
+      "id": "3x3_f2l_18",
+      "methodId": "cfop",
+      "group": "F2L",
+      "name": "F2L 18 - Putih Atas, Jarak 1 Kiri",
+      "notation": "U2 y' R' U' R U' R' U R y",
+      "setupMoves": "y' R' U' R U R' U R U2 y",
+      "description": "Corner putih di atas untuk slot kiri.",
+      "fingerTricks": "U2 lalu insert kiri R' U' R."
+    },
+    {
+      "id": "3x3_f2l_19",
+      "methodId": "cfop",
+      "group": "F2L",
+      "name": "F2L 19 - Putih Atas, Bentuk Blok",
+      "notation": "U R U2 R' U R U' R'",
+      "setupMoves": "R U R' U' R U2 R' U'",
+      "description": "Corner putih di atas, buat blok 1x2 sebelum insert.",
+      "fingerTricks": "U R U2 R' satukan blok lalu insert."
+    },
+    {
+      "id": "3x3_f2l_20",
+      "methodId": "cfop",
+      "group": "F2L",
+      "name": "F2L 20 - Putih Atas, Bentuk Blok Kiri",
+      "notation": "y' U' R' U2 R U' R' U R y",
+      "setupMoves": "y' R' U' R U R' U2 R U y",
+      "description": "Corner putih di atas, buat blok sisi kiri.",
+      "fingerTricks": "Cermin F2L 19 untuk tangan kiri."
+    },
+    {
+      "id": "3x3_f2l_21",
+      "methodId": "cfop",
+      "group": "F2L",
+      "name": "F2L 21 - Putih Atas, Edge Dekat Slot",
+      "notation": "R U2 R' U' y' R' U R y",
+      "setupMoves": "y' R' U' R y R U2 R'",
+      "description": "Corner putih di atas, edge dekat slot tujuan.",
+      "fingerTricks": "R U2 R' pisahkan lalu masukkan ke slot."
+    },
+    {
+      "id": "3x3_f2l_22",
+      "methodId": "cfop",
+      "group": "F2L",
+      "name": "F2L 22 - Putih Atas, Edge Jauh Slot",
+      "notation": "y' R' U2 R U y R U' R'",
+      "setupMoves": "R U R' y' R' U2 R y",
+      "description": "Corner putih di atas, edge jauh dari slot.",
+      "fingerTricks": "Bawa corner ke posisi tepat lalu pasangkan."
+    },
+    {
+      "id": "3x3_f2l_23",
+      "methodId": "cfop",
+      "group": "F2L",
+      "name": "F2L 23 - Corner di Slot, Putih Kanan",
+      "notation": "R U' R' U R U' R'",
+      "setupMoves": "R U R' U' R U R'",
+      "description": "Corner terjebak di slot menghadap kanan, keluarkan.",
+      "fingerTricks": "Keluarkan dengan R U' R' lalu gabungkan."
+    },
+    {
+      "id": "3x3_f2l_24",
+      "methodId": "cfop",
+      "group": "F2L",
+      "name": "F2L 24 - Corner di Slot, Putih Depan",
+      "notation": "R U R' U' R U R'",
+      "setupMoves": "R' U' R U R' U' R",
+      "description": "Corner terjebak di slot menghadap depan, keluarkan.",
+      "fingerTricks": "Keluarkan dengan R U R' lalu gabungkan."
+    },
+    {
+      "id": "3x3_f2l_25",
+      "methodId": "cfop",
+      "group": "F2L",
+      "name": "F2L 25 - Corner di Slot, Putih Terbalik",
+      "notation": "R U R' U' R U R' U' R U R'",
+      "setupMoves": "R U' R' U R U' R' U R U' R'",
+      "description": "Corner di slot orientasi terbalik, 3x sexy move.",
+      "fingerTricks": "Ulangi 3 kali (R U R' U') hingga terorientasi."
+    },
+    {
+      "id": "3x3_f2l_26",
+      "methodId": "cfop",
+      "group": "F2L",
+      "name": "F2L 26 - Edge di Slot, Putih Atas",
+      "notation": "U' R U' R' U2 R U' R'",
+      "setupMoves": "R U R' U2 R U R' U",
+      "description": "Edge di slot yang benar, corner di layer atas.",
+      "fingerTricks": "Keluarkan edge bersamaan dengan pairing corner."
+    },
+    {
+      "id": "3x3_f2l_27",
+      "methodId": "cfop",
+      "group": "F2L",
+      "name": "F2L 27 - Edge di Slot, Putih Kanan",
+      "notation": "R U' R' U' R U R'",
+      "setupMoves": "R' U' R U R U R'",
+      "description": "Edge di slot, sudut putih menghadap kanan.",
+      "fingerTricks": "R U' R' keluarkan edge sambil membuat pasangan."
+    },
+    {
+      "id": "3x3_f2l_28",
+      "methodId": "cfop",
+      "group": "F2L",
+      "name": "F2L 28 - Edge di Slot, Putih Depan",
+      "notation": "R U R' U d R' U' R",
+      "setupMoves": "R' U R d' R' U' R",
+      "description": "Edge di slot, sudut putih menghadap depan.",
+      "fingerTricks": "Gunakan rotasi d halus untuk insert cepat."
+    },
+    {
+      "id": "3x3_f2l_29",
+      "methodId": "cfop",
+      "group": "F2L",
+      "name": "F2L 29 - Edge Terbalik di Slot, Putih Kanan",
+      "notation": "R U' R' d R' U R",
+      "setupMoves": "R' U' R d' R U R'",
+      "description": "Edge terbalik di slot tujuan, corner putih di kanan.",
+      "fingerTricks": "Keluarkan edge dan orientasikan bersama corner."
+    },
+    {
+      "id": "3x3_f2l_30",
+      "methodId": "cfop",
+      "group": "F2L",
+      "name": "F2L 30 - Edge Terbalik di Slot, Putih Depan",
+      "notation": "R U R' U' d R' U' R",
+      "setupMoves": "R' U R d' R U' R'",
+      "description": "Edge terbalik di slot tujuan, corner putih di depan.",
+      "fingerTricks": "Bongkar slot dan pasangkan di layer U."
+    },
+    {
+      "id": "3x3_f2l_31",
+      "methodId": "cfop",
+      "group": "F2L",
+      "name": "F2L 31 - Edge Terbalik di Slot, Putih Atas",
+      "notation": "R U R' U2 R U' R' U R U' R'",
+      "setupMoves": "R U R' U' R U R' U2 R U' R'",
+      "description": "Edge terbalik di slot, corner putih di atas.",
+      "fingerTricks": "Kombinasi keluarkan edge dan U2 pairing."
+    },
+    {
+      "id": "3x3_f2l_32",
+      "methodId": "cfop",
+      "group": "F2L",
+      "name": "F2L 32 - Keduanya di Slot, Corner Terbalik",
+      "notation": "R U' R' d R' U2 R U2 R U R'",
+      "setupMoves": "R' U' R' U2 R' U2 R d' R U R'",
+      "description": "Keduanya di slot, corner orientasi terbalik.",
+      "fingerTricks": "Keluarkan keduanya sekaligus lalu satukan."
+    },
+    {
+      "id": "3x3_f2l_33",
+      "methodId": "cfop",
+      "group": "F2L",
+      "name": "F2L 33 - Keduanya di Slot, Edge Terbalik",
+      "notation": "R U' R' U' R U R' U2 R U' R'",
+      "setupMoves": "R U R' U2 R U' R' U R U R'",
+      "description": "Keduanya di slot, edge terbalik di dalam slot.",
+      "fingerTricks": "Keluarkan corner dan edge ke layer atas."
+    },
+    {
+      "id": "3x3_f2l_34",
+      "methodId": "cfop",
+      "group": "F2L",
+      "name": "F2L 34 - Keduanya di Slot, Orientasi Salah",
+      "notation": "R U' R' d R' U' R U2 R U R'",
+      "setupMoves": "R' U' R' U2 R' U R d' R U R'",
+      "description": "Keduanya di slot, orientasi sudut salah.",
+      "fingerTricks": "Bongkar slot dengan R U' R' d."
+    },
+    {
+      "id": "3x3_f2l_35",
+      "methodId": "cfop",
+      "group": "F2L",
+      "name": "F2L 35 - Keduanya di Slot, Edge & Corner Salah",
+      "notation": "R U R' U' R U' R' U2 d R' U' R",
+      "setupMoves": "R' U R d' U2 R U R' U R U' R'",
+      "description": "Keduanya di slot dengan orientasi acak.",
+      "fingerTricks": "Keluarkan dengan sexy move lalu selesaikan."
+    },
+    {
+      "id": "3x3_f2l_36",
+      "methodId": "cfop",
+      "group": "F2L",
+      "name": "F2L 36 - Keduanya di Slot, Putih Depan",
+      "notation": "R U' R' U R U2 R' U R U' R'",
+      "setupMoves": "R U R' U' R U2 R' U' R U R'",
+      "description": "Corner putih menghadap depan di dalam slot.",
+      "fingerTricks": "Double flick U2 saat perbaikan posisi."
+    },
+    {
+      "id": "3x3_f2l_37",
+      "methodId": "cfop",
+      "group": "F2L",
+      "name": "F2L 37 - Keduanya di Slot, Tertukar Posisi",
+      "notation": "R U' R' d R' U' R U' R' U R",
+      "setupMoves": "R' U' R U R' U R d' R U R'",
+      "description": "Corner dan edge tertukar posisi orientasinya.",
+      "fingerTricks": "Gunakan d rotasi untuk integrasi langsung."
+    },
+    {
+      "id": "3x3_f2l_38",
+      "methodId": "cfop",
+      "group": "F2L",
+      "name": "F2L 38 - Pasangan Terjebak di Slot Salah",
+      "notation": "R U R' U' R' F R F'",
+      "setupMoves": "F R' F' R U R U' R'",
+      "description": "Pasangan sudah jadi tapi masuk ke slot yang salah.",
+      "fingerTricks": "Keluarkan dengan sledgehammer R' F R F'."
+    },
+    {
+      "id": "3x3_f2l_39",
+      "methodId": "cfop",
+      "group": "F2L",
+      "name": "F2L 39 - Pasangan Terbalik di Slot Salah",
+      "notation": "R U' R' U' R U' R' U R U' R'",
+      "setupMoves": "R U R' U' R U R' U R U R'",
+      "description": "Pasangan terbalik di slot yang salah.",
+      "fingerTricks": "Keluarkan lalu lakukan insert normal."
+    },
+    {
+      "id": "3x3_f2l_40",
+      "methodId": "cfop",
+      "group": "F2L",
+      "name": "F2L 40 - Pasangan di Slot Belakang",
+      "notation": "R' F R F' R U R'",
+      "setupMoves": "R' U' R' F R' F' R",
+      "description": "Pasangan terjebak di slot belakang kanan.",
+      "fingerTricks": "Gunakan variasi sledgehammer untuk mengangkat."
+    },
+    {
+      "id": "3x3_f2l_41",
+      "methodId": "cfop",
+      "group": "F2L",
+      "name": "F2L 41 - Slot Selesai tapi Edge Terbalik",
+      "notation": "R U' R' d R' U R U' R' U R",
+      "setupMoves": "R' U' R U R' U' R d' R U R'",
+      "description": "Kasus pamungkas: slot benar tapi edge terbalik.",
+      "fingerTricks": "Algoritma efisien untuk membalik edge di tempat."
+    },
+    {
+      "id": "3x3_oll_1",
+      "methodId": "cfop",
+      "group": "OLL",
+      "name": "OLL 1 - Dot 8-Mover",
+      "notation": "R U2 R2 F R F' U2 R' F R F'",
+      "setupMoves": "F R' F' R U2 F R' F' R2 U2 R'",
+      "description": "Titik tengah kuning tanpa edge kuning terorientasi.",
+      "fingerTricks": "Jalankan dengan ritme stabil."
+    },
+    {
+      "id": "3x3_oll_2",
+      "methodId": "cfop",
+      "group": "OLL",
+      "name": "OLL 2 - Dot T-Shape",
+      "notation": "r U r' U2 r y R' U R' U' r'",
+      "setupMoves": "r U R U' R y' r' U2 r U' r'",
+      "description": "Bentuk titik dengan 2 sudut berhadapan.",
+      "fingerTricks": "Gunakan putaran layer lebar r."
+    },
+    {
+      "id": "3x3_oll_3",
+      "methodId": "cfop",
+      "group": "OLL",
+      "name": "OLL 3 - Dot Anti-Slash",
+      "notation": "r' R2 U R' U r U2 r' U M'",
+      "setupMoves": "M U' r U2 r' U' R U' R2 r",
+      "description": "Bentuk titik dengan garis miring.",
+      "fingerTricks": "Manfaatkan slice M untuk efisiensi."
+    },
+    {
+      "id": "3x3_oll_4",
+      "methodId": "cfop",
+      "group": "OLL",
+      "name": "OLL 4 - Dot Slash",
+      "notation": "M U' r U2 r' U' R U' R' M'",
+      "setupMoves": "M R U R' U r U2 r' U M'",
+      "description": "Bentuk titik dengan garis miring sebaliknya.",
+      "fingerTricks": "Flick M dengan jari manis kiri."
+    },
+    {
+      "id": "3x3_oll_5",
+      "methodId": "cfop",
+      "group": "OLL",
+      "name": "OLL 5 - Square Kanan",
+      "notation": "r' U2 R U R' U r",
+      "setupMoves": "r' U' R U' R' U2 r",
+      "description": "Bentuk kotak 2x2 kuning di kanan.",
+      "fingerTricks": "Wide turn r' lalu U2."
+    },
+    {
+      "id": "3x3_oll_6",
+      "methodId": "cfop",
+      "group": "OLL",
+      "name": "OLL 6 - Square Kiri",
+      "notation": "r U2 R' U' R U' r'",
+      "setupMoves": "r U R' U R U2 r'",
+      "description": "Bentuk kotak 2x2 kuning di kiri.",
+      "fingerTricks": "Cermin OLL 5 untuk tangan kanan."
+    },
+    {
+      "id": "3x3_oll_7",
+      "methodId": "cfop",
+      "group": "OLL",
+      "name": "OLL 7 - Lightning Kanan",
+      "notation": "r U R' U R U2 r'",
+      "setupMoves": "r U2 R' U' R U' r'",
+      "description": "Bentuk petir petir kecil kanan.",
+      "fingerTricks": "Kombinasi r dan Sune kanan."
+    },
+    {
+      "id": "3x3_oll_8",
+      "methodId": "cfop",
+      "group": "OLL",
+      "name": "OLL 8 - Lightning Kiri",
+      "notation": "r' U' R U' R' U2 r",
+      "setupMoves": "r' U2 R U R' U r",
+      "description": "Bentuk petir petir kecil kiri.",
+      "fingerTricks": "Kombinasi r' dan Anti-Sune."
+    },
+    {
+      "id": "3x3_oll_9",
+      "methodId": "cfop",
+      "group": "OLL",
+      "name": "OLL 9 - Ikan Kanan (Fish)",
+      "notation": "R U R' U' R' F R2 U R' U' F'",
+      "setupMoves": "F U R U' R2 F' R U R U' R'",
+      "description": "Bentuk ikan menghadap kanan.",
+      "fingerTricks": "Sledgehammer insert di akhir."
+    },
+    {
+      "id": "3x3_oll_10",
+      "methodId": "cfop",
+      "group": "OLL",
+      "name": "OLL 10 - Ikan Kiri (Fish)",
+      "notation": "R U R' U R' F R F' R U2 R'",
+      "setupMoves": "R U2 R' F R' F' R U' R U' R'",
+      "description": "Bentuk ikan menghadap kiri.",
+      "fingerTricks": "Gunakan F flick telunjuk."
+    },
+    {
+      "id": "3x3_oll_11",
+      "methodId": "cfop",
+      "group": "OLL",
+      "name": "OLL 11 - Lightning Besar",
+      "notation": "r' R U R U R' U' r R2 F R F'",
+      "setupMoves": "F R' F' R2 r' U R U' R' U' R' r",
+      "description": "Bentuk petir panjang.",
+      "fingerTricks": "Gerakan lancar tanpa regrip."
+    },
+    {
+      "id": "3x3_oll_12",
+      "methodId": "cfop",
+      "group": "OLL",
+      "name": "OLL 12 - Lightning Besar Cermin",
+      "notation": "M' R' U' R U' R' U2 R U' R r'",
+      "setupMoves": "r R' U R' U2 R U R' U R M",
+      "description": "Bentuk petir panjang terbalik.",
+      "fingerTricks": "Gunakan dorongan slice tengah M'."
+    },
+    {
+      "id": "3x3_oll_13",
+      "methodId": "cfop",
+      "group": "OLL",
+      "name": "OLL 13 - Kuda Kanan (Knight)",
+      "notation": "F U R U' R2 F' R U R U' R'",
+      "setupMoves": "R U R' U' R' F R2 U R' U' F'",
+      "description": "Bentuk langkah kuda catur di kanan.",
+      "fingerTricks": "Awali dengan F dorong telunjuk."
+    },
+    {
+      "id": "3x3_oll_14",
+      "methodId": "cfop",
+      "group": "OLL",
+      "name": "OLL 14 - Kuda Kiri (Knight)",
+      "notation": "R' F R U R' F' R F U' F'",
+      "setupMoves": "F U F' R' F R U' R' F' R",
+      "description": "Bentuk langkah kuda catur di kiri.",
+      "fingerTricks": "Gerakan F dan F' presisi."
+    },
+    {
+      "id": "3x3_oll_15",
+      "methodId": "cfop",
+      "group": "OLL",
+      "name": "OLL 15 - Kuda Vertikal Kiri",
+      "notation": "r' U' r R' U' R U r' U r",
+      "setupMoves": "r' U' r U' R' U R r' U r",
+      "description": "Bentuk langkah kuda vertikal.",
+      "fingerTricks": "Kombinasi r' U' r."
+    },
+    {
+      "id": "3x3_oll_16",
+      "methodId": "cfop",
+      "group": "OLL",
+      "name": "OLL 16 - Kuda Vertikal Kanan",
+      "notation": "r U r' R U R' U' r U' r'",
+      "setupMoves": "r U r' U R U' R' r U' r'",
+      "description": "Bentuk langkah kuda vertikal kanan.",
+      "fingerTricks": "Kombinasi r U r'."
+    },
+    {
+      "id": "3x3_oll_17",
+      "methodId": "cfop",
+      "group": "OLL",
+      "name": "OLL 17 - Diagonal Dot",
+      "notation": "F R' F' R2 r' U R U' R' U' M'",
+      "setupMoves": "M U R U R' U' r R2 F R F'",
+      "description": "Titik tengah dengan 2 diagonal berlawanan.",
+      "fingerTricks": "Algoritma dot klasik speedcubing."
+    },
+    {
+      "id": "3x3_oll_18",
+      "methodId": "cfop",
+      "group": "OLL",
+      "name": "OLL 18 - Mahkota Dot",
+      "notation": "r U R' U R U2 r2 U' R U' R' U2 r",
+      "setupMoves": "r' U2 R U R' U r2 U2 R' U' R U' r'",
+      "description": "Titik tengah menyerupai mahkota.",
+      "fingerTricks": "Double r2 di tengah rumus."
+    },
+    {
+      "id": "3x3_oll_19",
+      "methodId": "cfop",
+      "group": "OLL",
+      "name": "OLL 19 - Dot X-Shape",
+      "notation": "M U R U R' U' M' R' F R F'",
+      "setupMoves": "F R' F' R M U R U' R' U' M'",
+      "description": "Titik tengah membentuk pola X.",
+      "fingerTricks": "Awali slice M ke atas."
+    },
+    {
+      "id": "3x3_oll_20",
+      "methodId": "cfop",
+      "group": "OLL",
+      "name": "OLL 20 - Dot Cross-Shape",
+      "notation": "M U R U R' U' M2 U R U' r'",
+      "setupMoves": "r U R' U' M2 U R U' R' U' M'",
+      "description": "Titik tengah membentuk palang kecil.",
+      "fingerTricks": "Double M2 di tengah eksekusi."
+    },
+    {
+      "id": "3x3_oll_21",
+      "methodId": "cfop",
+      "group": "OLL",
+      "name": "OLL 21 - Cross H",
+      "notation": "R U2 R' U' R U R' U' R U' R'",
+      "setupMoves": "R U R' U R U' R' U R U2 R'",
+      "description": "Palang kuning penuh dengan 4 sudut terorientasi ke samping (H).",
+      "fingerTricks": "Double flick U2 lalu ritme R U R' bergantian."
+    },
+    {
+      "id": "3x3_oll_22",
+      "methodId": "cfop",
+      "group": "OLL",
+      "name": "OLL 22 - Cross Pi",
+      "notation": "R U2 R2 U' R2 U' R2 U2 R",
+      "setupMoves": "R' U2 R2 U R2 U R2 U2 R'",
+      "description": "Palang kuning dengan 2 pasang sudut berlawanan (Pi).",
+      "fingerTricks": "R U2 lalu ulangi R2 U' secara berirama."
+    },
+    {
+      "id": "3x3_oll_23",
+      "methodId": "cfop",
+      "group": "OLL",
+      "name": "OLL 23 - Cross Headlights (U)",
+      "notation": "R2 D R' U2 R D' R' U2 R'",
+      "setupMoves": "R U2 R D R' U2 R D' R2",
+      "description": "Palang kuning dengan 2 lampu depan kuning (Headlights).",
+      "fingerTricks": "Gunakan jari manis kiri untuk push D dan D'."
+    },
+    {
+      "id": "3x3_oll_24",
+      "methodId": "cfop",
+      "group": "OLL",
+      "name": "OLL 24 - Cross Chameleon (T)",
+      "notation": "r U R' U' r' F R F'",
+      "setupMoves": "F R' F' r U R U' r'",
+      "description": "Palang kuning dengan sudut bunglon mengarah ke samping.",
+      "fingerTricks": "Buka dengan wide r lalu tutup dengan F R F'."
+    },
+    {
+      "id": "3x3_oll_25",
+      "methodId": "cfop",
+      "group": "OLL",
+      "name": "OLL 25 - Cross Bowtie (L)",
+      "notation": "F' r U R' U' r' F R",
+      "setupMoves": "R' F' r U R U' r' F",
+      "description": "Palang kuning dengan sudut dasi kupu-kupu (Bowtie).",
+      "fingerTricks": "Awali dengan F' jempol kiri."
+    },
+    {
+      "id": "3x3_oll_26",
+      "methodId": "cfop",
+      "group": "OLL",
+      "name": "OLL 26 - Cross Anti-Sune",
+      "notation": "R U2 R' U' R U' R'",
+      "setupMoves": "R U R' U R U2 R'",
+      "description": "Palang kuning dengan satu sudut menghadap atas di depan-kanan.",
+      "fingerTricks": "R U2 R' lalu U' R U' R' cepat."
+    },
+    {
+      "id": "3x3_oll_27",
+      "methodId": "cfop",
+      "group": "OLL",
+      "name": "OLL 27 - Cross Sune",
+      "notation": "R U R' U R U2 R'",
+      "setupMoves": "R U2 R' U' R U' R'",
+      "description": "Rumus legendaris: 1 sudut kuning di atas kiri-depan.",
+      "fingerTricks": "Trigger cepat: R U R' U R U2 R'."
+    },
+    {
+      "id": "3x3_oll_28",
+      "methodId": "cfop",
+      "group": "OLL",
+      "name": "OLL 28 - Sudut Selesai (Stealth)",
+      "notation": "r U R' U' M U R U' R'",
+      "setupMoves": "R U R' U' M' U R U' r'",
+      "description": "Semua 4 sudut sudah kuning, 2 edge belum.",
+      "fingerTricks": "Kombinasi sexy move dan slice M."
+    },
+    {
+      "id": "3x3_oll_29",
+      "methodId": "cfop",
+      "group": "OLL",
+      "name": "OLL 29 - Awkward Shape Kanan",
+      "notation": "R U R' U' R U' R' F' U' F R U R'",
+      "setupMoves": "R' U' R' F' U F R U R' U R U' R'",
+      "description": "Bentuk asimetris canggung di kanan.",
+      "fingerTricks": "Transisi halus F' U' F."
+    },
+    {
+      "id": "3x3_oll_30",
+      "methodId": "cfop",
+      "group": "OLL",
+      "name": "OLL 30 - Awkward Shape Kiri",
+      "notation": "F R' F R2 U' R' U' R U R' F2",
+      "setupMoves": "F2 R U' R' U R U R2 F' R F'",
+      "description": "Bentuk asimetris canggung di kiri.",
+      "fingerTricks": "Double F2 di penutup."
+    },
+    {
+      "id": "3x3_oll_31",
+      "methodId": "cfop",
+      "group": "OLL",
+      "name": "OLL 31 - Huruf P Kanan",
+      "notation": "R' U' F U R U' R' F' R",
+      "setupMoves": "R' F R U R' U' F' U R",
+      "description": "Pola membentuk huruf P di kanan.",
+      "fingerTricks": "R' U' lalu F trigger."
+    },
+    {
+      "id": "3x3_oll_32",
+      "methodId": "cfop",
+      "group": "OLL",
+      "name": "OLL 32 - Huruf P Kiri",
+      "notation": "L U F' U' L' U L F L'",
+      "setupMoves": "L F' L' U' L U F U' L'",
+      "description": "Pola membentuk huruf P di kiri.",
+      "fingerTricks": "Versi tangan kiri OLL 31."
+    },
+    {
+      "id": "3x3_oll_33",
+      "methodId": "cfop",
+      "group": "OLL",
+      "name": "OLL 33 - Huruf T Kecil",
+      "notation": "R U R' U' R' F R F'",
+      "setupMoves": "F R' F' R U R U' R'",
+      "description": "Bentuk huruf T di atas layer.",
+      "fingerTricks": "Sexy move R U R' U' lalu sledgehammer."
+    },
+    {
+      "id": "3x3_oll_34",
+      "methodId": "cfop",
+      "group": "OLL",
+      "name": "OLL 34 - Huruf C Lebar",
+      "notation": "R U R2 U' R' F R U R U' F'",
+      "setupMoves": "F U R' U' R' F' R U R2 U' R'",
+      "description": "Bentuk huruf C dengan lampu depan.",
+      "fingerTricks": "R U R2 U' ritme cepat."
+    },
+    {
+      "id": "3x3_oll_35",
+      "methodId": "cfop",
+      "group": "OLL",
+      "name": "OLL 35 - Ikan Bersayap",
+      "notation": "R U2 R2 F R F' R U2 R'",
+      "setupMoves": "R U2 R' F R' F' R2 U2 R'",
+      "description": "Bentuk ikan dengan sayap kuning.",
+      "fingerTricks": "R U2 R2 lalu F R F'."
+    },
+    {
+      "id": "3x3_oll_36",
+      "methodId": "cfop",
+      "group": "OLL",
+      "name": "OLL 36 - Huruf W Kiri",
+      "notation": "L' U' L U' L' U L U L F' L' F",
+      "setupMoves": "F' L F L' U' L' U' L U L' U L",
+      "description": "Pola membentuk huruf W menghadap kiri.",
+      "fingerTricks": "Eksekusi tangan kiri halus."
+    },
+    {
+      "id": "3x3_oll_37",
+      "methodId": "cfop",
+      "group": "OLL",
+      "name": "OLL 37 - Ikan Terbalik",
+      "notation": "F R' F' R U R U' R'",
+      "setupMoves": "R U R' U' R' F R F'",
+      "description": "Bentuk ikan kecil dengan sudut atas.",
+      "fingerTricks": "Sledgehammer lalu insert."
+    },
+    {
+      "id": "3x3_oll_38",
+      "methodId": "cfop",
+      "group": "OLL",
+      "name": "OLL 38 - Huruf W Kanan",
+      "notation": "R U R' U R U' R' U' R' F R F'",
+      "setupMoves": "F' L F L' U L U L' U' L U' L'",
+      "description": "Pola membentuk huruf W menghadap kanan.",
+      "fingerTricks": "R U R' U variasi lalu sledgehammer."
+    },
+    {
+      "id": "3x3_oll_39",
+      "methodId": "cfop",
+      "group": "OLL",
+      "name": "OLL 39 - Huruf L Besar Kiri",
+      "notation": "L F' L' U' L U F U' L'",
+      "setupMoves": "L U F' U' L' U L F L'",
+      "description": "Bentuk sudut L besar di kiri.",
+      "fingerTricks": "L F' L' trigger pembuka."
+    },
+    {
+      "id": "3x3_oll_40",
+      "methodId": "cfop",
+      "group": "OLL",
+      "name": "OLL 40 - Huruf L Besar Kanan",
+      "notation": "R' F R U R' U' F' U R",
+      "setupMoves": "R' U' F U R U' R' F' R",
+      "description": "Bentuk sudut L besar di kanan.",
+      "fingerTricks": "R' F R trigger pembuka."
+    },
+    {
+      "id": "3x3_oll_41",
+      "methodId": "cfop",
+      "group": "OLL",
+      "name": "OLL 41 - Awkward Cermin",
+      "notation": "R U R' U R U2 R' F R U R' U' F'",
+      "setupMoves": "F U R U' R' F' R U2 R' U' R U' R'",
+      "description": "Bentuk canggung asimetris.",
+      "fingerTricks": "Sune pembuka lalu F R U R' U' F'."
+    },
+    {
+      "id": "3x3_oll_42",
+      "methodId": "cfop",
+      "group": "OLL",
+      "name": "OLL 42 - Awkward Cermin Kiri",
+      "notation": "R' U' R U' R' U2 R F R U R' U' F'",
+      "setupMoves": "F U R U' R' F' R' U2 R U R' U R",
+      "description": "Bentuk canggung asimetris kiri.",
+      "fingerTricks": "Anti-Sune pembuka lalu F trigger."
+    },
+    {
+      "id": "3x3_oll_43",
+      "methodId": "cfop",
+      "group": "OLL",
+      "name": "OLL 43 - Huruf P Solid Kiri",
+      "notation": "F' U' L' U L F",
+      "setupMoves": "F' L' U' L U F",
+      "description": "Huruf P solid di sisi kiri.",
+      "fingerTricks": "F' pembuka dengan jempol kiri."
+    },
+    {
+      "id": "3x3_oll_44",
+      "methodId": "cfop",
+      "group": "OLL",
+      "name": "OLL 44 - Huruf P Solid Kanan",
+      "notation": "F U R U' R' F'",
+      "setupMoves": "F R U R' U' F'",
+      "description": "Huruf P solid di sisi kanan.",
+      "fingerTricks": "F pembuka telunjuk kanan."
+    },
+    {
+      "id": "3x3_oll_45",
+      "methodId": "cfop",
+      "group": "OLL",
+      "name": "OLL 45 - Garis T Sederhana",
+      "notation": "F R U R' U' F'",
+      "setupMoves": "F R U R' U' F'",
+      "description": "Garis tengah membentuk T sederhana.",
+      "fingerTricks": "Rumus paling populer bagi pemula."
+    },
+    {
+      "id": "3x3_oll_46",
+      "methodId": "cfop",
+      "group": "OLL",
+      "name": "OLL 46 - Huruf C Sempit",
+      "notation": "R' U' R' F R F' U R",
+      "setupMoves": "R' U' F R' F' R U R",
+      "description": "Bentuk huruf C dengan sudut terorientasi.",
+      "fingerTricks": "R' U' R' lalu sledgehammer."
+    },
+    {
+      "id": "3x3_oll_47",
+      "methodId": "cfop",
+      "group": "OLL",
+      "name": "OLL 47 - L Kecil Kiri",
+      "notation": "F' L' U' L U L' U' L U F",
+      "setupMoves": "F' U' L' U L U' L' U L F",
+      "description": "Sudut L kecil dengan dua pasang.",
+      "fingerTricks": "Eksekusi tangan kiri stabil."
+    },
+    {
+      "id": "3x3_oll_48",
+      "methodId": "cfop",
+      "group": "OLL",
+      "name": "OLL 48 - L Kecil Kanan",
+      "notation": "F R U R' U' R U R' U' F'",
+      "setupMoves": "F U R U' R' U R U' R' F'",
+      "description": "Sudut L kecil dengan double sexy move.",
+      "fingerTricks": "F lalu 2x (R U R' U') lalu F'."
+    },
+    {
+      "id": "3x3_oll_49",
+      "methodId": "cfop",
+      "group": "OLL",
+      "name": "OLL 49 - L Kecil Strip",
+      "notation": "r U' r2 U r2 U r2 U' r",
+      "setupMoves": "r' U r2 U' r2 U' r2 U r'",
+      "description": "Sudut L kecil dengan strip samping.",
+      "fingerTricks": "Double r2 berirama."
+    },
+    {
+      "id": "3x3_oll_50",
+      "methodId": "cfop",
+      "group": "OLL",
+      "name": "OLL 50 - L Kecil Strip Kiri",
+      "notation": "r' U r2 U' r2 U' r2 U r'",
+      "setupMoves": "r U' r2 U r2 U r2 U' r",
+      "description": "Versi cermin dari OLL 49.",
+      "fingerTricks": "Double r2 dengan putaran U'."
+    },
+    {
+      "id": "3x3_oll_51",
+      "methodId": "cfop",
+      "group": "OLL",
+      "name": "OLL 51 - Garis Lurus I-Shape",
+      "notation": "F U R U' R' U R U' R' F'",
+      "setupMoves": "F R U R' U' R U R' U' F'",
+      "description": "Garis horizontal lurus 1x3 penuh.",
+      "fingerTricks": "F U lalu 2x sexy move lalu F'."
+    },
+    {
+      "id": "3x3_oll_52",
+      "methodId": "cfop",
+      "group": "OLL",
+      "name": "OLL 52 - Garis Lurus B-Turn",
+      "notation": "R U R' U R U' B U' B' R'",
+      "setupMoves": "R B U B' U' R' U' R U' R'",
+      "description": "Garis lurus dengan sudut belakang.",
+      "fingerTricks": "Transisi halus B U' B'."
+    },
+    {
+      "id": "3x3_oll_53",
+      "methodId": "cfop",
+      "group": "OLL",
+      "name": "OLL 53 - L Kecil Anti-Sune",
+      "notation": "r' U' R U' R' U R U' R' U2 r",
+      "setupMoves": "r' U2 R U R' U' R U R' U r",
+      "description": "Sudut L kecil kombinasi anti-sune.",
+      "fingerTricks": "Wide r' penutup."
+    },
+    {
+      "id": "3x3_oll_54",
+      "methodId": "cfop",
+      "group": "OLL",
+      "name": "OLL 54 - L Kecil Sune",
+      "notation": "r U R' U R U' R' U R U2 r'",
+      "setupMoves": "r U2 R' U' R U R' U' R U' r'",
+      "description": "Sudut L kecil kombinasi sune.",
+      "fingerTricks": "Wide r penutup."
+    },
+    {
+      "id": "3x3_oll_55",
+      "methodId": "cfop",
+      "group": "OLL",
+      "name": "OLL 55 - Garis Panjang Pararel",
+      "notation": "R' F R U R U' R2 F' R2 U' R' U R U R'",
+      "setupMoves": "R' U' R' U' R U R2 F R2 U R' U' R' F' R",
+      "description": "Garis lurus I dengan dua pasang samping.",
+      "fingerTricks": "Algoritma 15-gerakan tercepat."
+    },
+    {
+      "id": "3x3_oll_56",
+      "methodId": "cfop",
+      "group": "OLL",
+      "name": "OLL 56 - Garis Panjang Alternatif",
+      "notation": "r' U' r U' R' U R U' R' U R r' U r",
+      "setupMoves": "r' U' r R' U' R U R' U' R U r' U r",
+      "description": "Garis lurus I dengan slice r.",
+      "fingerTricks": "Gerakan r' U' r di awal dan akhir."
+    },
+    {
+      "id": "3x3_oll_57",
+      "methodId": "cfop",
+      "group": "OLL",
+      "name": "OLL 57 - Sudut Lengkap Cermin",
+      "notation": "R U R' U' M' U R U' r'",
+      "setupMoves": "r U R' U' M U R U' R'",
+      "description": "4 sudut sudah kuning, 2 edge tersisa.",
+      "fingerTricks": "Sexy move lalu slice M'."
+    },
+    {
+      "id": "3x3_pll_aa",
+      "methodId": "cfop",
+      "group": "PLL",
+      "name": "PLL - Aa-Perm",
+      "notation": "x R' U R' D2 R U' R' D2 R2 x'",
+      "setupMoves": "x R2 D2 R U R' D2 R U' R x'",
+      "description": "Permutasi 3 sudut berputar searah jarum jam.",
+      "fingerTricks": "Awali rotasi x, gunakan double-flick jari manis+kelingking untuk D2."
+    },
+    {
+      "id": "3x3_pll_ab",
+      "methodId": "cfop",
+      "group": "PLL",
+      "name": "PLL - Ab-Perm",
+      "notation": "x R2 D2 R U R' D2 R U' R x'",
+      "setupMoves": "x R' U R' D2 R U' R' D2 R2 x'",
+      "description": "Permutasi 3 sudut berputar berlawanan jarum jam.",
+      "fingerTricks": "Awali rotasi x, double-flick D2 di awal."
+    },
+    {
+      "id": "3x3_pll_f",
+      "methodId": "cfop",
+      "group": "PLL",
+      "name": "PLL - F-Perm",
+      "notation": "R' U' F' R U R' U' R' F R2 U' R' U R U' R",
+      "setupMoves": "R' U R U' R' F' U' F R U R' F R' F' R U' R",
+      "description": "Menukar 2 sudut sejajar dan 2 edge di hadapannya.",
+      "fingerTricks": "Awali dengan R' U' F' lalu variasi T-Perm."
+    },
+    {
+      "id": "3x3_pll_ga",
+      "methodId": "cfop",
+      "group": "PLL",
+      "name": "PLL - Ga-Perm",
+      "notation": "R2 U R' U R' U' R U' R2 D U' R' U R D'",
+      "setupMoves": "D R' U' R U D' R2 U R' U R U' R U' R2",
+      "description": "Double cycle sudut dan edge (kasus G1).",
+      "fingerTricks": "Gunakan push D dengan jari manis kiri di tengah."
+    },
+    {
+      "id": "3x3_pll_gb",
+      "methodId": "cfop",
+      "group": "PLL",
+      "name": "PLL - Gb-Perm",
+      "notation": "R' U' R U D' R2 U R' U R U' R U' R2 D",
+      "setupMoves": "D' R2 U R U' R' U R' U' R2 D U' R' U R",
+      "description": "Double cycle sudut dan edge (kasus G2).",
+      "fingerTricks": "Transisi halus U D' simultan."
+    },
+    {
+      "id": "3x3_pll_gc",
+      "methodId": "cfop",
+      "group": "PLL",
+      "name": "PLL - Gc-Perm",
+      "notation": "R2 U' R U' R U R' U R2 D' U R U' R' D",
+      "setupMoves": "D' R U R' U' D R2 U' R U' R' U R' U R2",
+      "description": "Double cycle sudut dan edge (kasus G3).",
+      "fingerTricks": "D' push dengan manis kiri."
+    },
+    {
+      "id": "3x3_pll_gd",
+      "methodId": "cfop",
+      "group": "PLL",
+      "name": "PLL - Gd-Perm",
+      "notation": "R U R' U' D R2 U' R U' R' U R' U R2 D'",
+      "setupMoves": "D R2 U' R U' R U R' U R2 D' U R U' R'",
+      "description": "Double cycle sudut dan edge (kasus G4).",
+      "fingerTricks": "Sexy move pembuka R U R' U' lalu D."
+    },
+    {
+      "id": "3x3_pll_h",
+      "methodId": "cfop",
+      "group": "PLL",
+      "name": "PLL - H-Perm",
+      "notation": "M2 U M2 U2 M2 U M2",
+      "setupMoves": "M2 U M2 U2 M2 U M2",
+      "description": "Menukar dua pasang edge yang saling berseberangan (Cross swap).",
+      "fingerTricks": "Gunakan double-flick M2 dengan jari manis+tengah kiri."
+    },
+    {
+      "id": "3x3_pll_ja",
+      "methodId": "cfop",
+      "group": "PLL",
+      "name": "PLL - Ja-Perm",
+      "notation": "R' U L' U2 R U' R' U2 R L",
+      "setupMoves": "L' R' U2 R U R' U2 L U' R",
+      "description": "Menukar 2 sudut kiri dan 2 edge kiri membentuk garis L.",
+      "fingerTricks": "Transisi L' dan L dengan jari manis kiri."
+    },
+    {
+      "id": "3x3_pll_jb",
+      "methodId": "cfop",
+      "group": "PLL",
+      "name": "PLL - Jb-Perm",
+      "notation": "R U R' F' R U R' U' R' F R2 U' R'",
+      "setupMoves": "R U R2 F' R U R U' R' F R U' R'",
+      "description": "Menukar 2 sudut kanan dan edge kanan (garis lurus 1x3).",
+      "fingerTricks": "Rumus PLL tercepat di dunia, eksekusi dalam sub-0.8 detik!"
+    },
+    {
+      "id": "3x3_pll_na",
+      "methodId": "cfop",
+      "group": "PLL",
+      "name": "PLL - Na-Perm",
+      "notation": "R U R' U R U R' F' R U R' U' R' F R2 U' R' U2 R U' R'",
+      "setupMoves": "R U R' U2 R U' R2 F R U R' U' R' F' R U' R' U' R U' R'",
+      "description": "Menukar 2 pasang sudut dan edge diagonal di sisi kanan.",
+      "fingerTricks": "Jb-Perm diapit trigger R U R'."
+    },
+    {
+      "id": "3x3_pll_nb",
+      "methodId": "cfop",
+      "group": "PLL",
+      "name": "PLL - Nb-Perm",
+      "notation": "R' U R U' R' F' U' F R U R' F R' F' R U' R",
+      "setupMoves": "R' U R' F R F' R U' R' F' U F R U R' U' R",
+      "description": "Menukar 2 pasang sudut dan edge diagonal di sisi kiri.",
+      "fingerTricks": "Versi cermin dari Na-Perm."
+    },
+    {
+      "id": "3x3_pll_ra",
+      "methodId": "cfop",
+      "group": "PLL",
+      "name": "PLL - Ra-Perm",
+      "notation": "R U' R' U' R U R D R' U' R D' R' U2 R'",
+      "setupMoves": "R U2 R D R' U R D' R' U' R' U R U R'",
+      "description": "Menukar 2 sudut sejajar dan 2 edge bersebelahan (R1).",
+      "fingerTricks": "D dan D' menggunakan jari manis kiri."
+    },
+    {
+      "id": "3x3_pll_rb",
+      "methodId": "cfop",
+      "group": "PLL",
+      "name": "PLL - Rb-Perm",
+      "notation": "R' U2 R' D' R U' R' D R U R U' R' U' R",
+      "setupMoves": "R' U R U R' U' R' D' R U R' D R2 U2 R",
+      "description": "Menukar 2 sudut sejajar dan 2 edge bersebelahan (R2).",
+      "fingerTricks": "R' U2 R' pembuka cepat."
+    },
+    {
+      "id": "3x3_pll_t",
+      "methodId": "cfop",
+      "group": "PLL",
+      "name": "PLL - T-Perm",
+      "notation": "R U R' U' R' F R2 U' R' U' R U R' F'",
+      "setupMoves": "F R U' R' U R U R2 F' R U R U' R'",
+      "description": "Menukar 2 sudut kanan dan 2 edge (depan & belakang).",
+      "fingerTricks": "Kombinasi sexy move + F R2 + U' R' U' R U R' F'."
+    },
+    {
+      "id": "3x3_pll_ua",
+      "methodId": "cfop",
+      "group": "PLL",
+      "name": "PLL - Ua-Perm",
+      "notation": "R U' R U R U R U' R' U' R2",
+      "setupMoves": "R2 U R U R' U' R' U' R' U R'",
+      "description": "Rotasi 3 edge berlawanan jarum jam (sudut sudah benar semua).",
+      "fingerTricks": "Flick U dan U' stabil, dorong R terus menerus."
+    },
+    {
+      "id": "3x3_pll_ub",
+      "methodId": "cfop",
+      "group": "PLL",
+      "name": "PLL - Ub-Perm",
+      "notation": "R2 U R U R' U' R' U' R' U R'",
+      "setupMoves": "R U' R U R U R U' R' U' R2",
+      "description": "Rotasi 3 edge searah jarum jam (sudut sudah benar semua).",
+      "fingerTricks": "R2 pembuka lalu U R U R'."
+    },
+    {
+      "id": "3x3_pll_v",
+      "methodId": "cfop",
+      "group": "PLL",
+      "name": "PLL - V-Perm",
+      "notation": "R' U R' U' y R' F' R2 U' R' U R' F R F",
+      "setupMoves": "F' R' F R U' R U R2 F R y' U R U' R",
+      "description": "Menukar 2 sudut diagonal dan 2 edge bersebelahan.",
+      "fingerTricks": "Rotasi y halus di tengah rumus."
+    },
+    {
+      "id": "3x3_pll_y",
+      "methodId": "cfop",
+      "group": "PLL",
+      "name": "PLL - Y-Perm",
+      "notation": "F R U' R' U' R U R' F' R U R' U' R' F R F'",
+      "setupMoves": "F R' F' R U R U' R' F R U' R' U R U R' F'",
+      "description": "Menukar 2 sudut diagonal dan 2 edge bersebelahan membentuk pola huruf Y.",
+      "fingerTricks": "Awali F R U' R' U' lalu sambung R U R' F'."
+    },
+    {
+      "id": "3x3_pll_z",
+      "methodId": "cfop",
+      "group": "PLL",
+      "name": "PLL - Z-Perm",
+      "notation": "M' U M2 U M2 U M' U2 M2",
+      "setupMoves": "M2 U2 M U M2 U M2 U M",
+      "description": "Menukar 2 pasang edge yang saling bersebelahan secara diagonal.",
+      "fingerTricks": "Jentikkan M' dengan telunjuk/tengah, M2 double-flick."
+    },
+    {
+      "id": "3x3_pll_e",
+      "methodId": "cfop",
+      "group": "PLL",
+      "name": "PLL - E-Perm",
+      "notation": "x' R U' R' D R U R' D' R U R' D R U' R' D' x",
+      "setupMoves": "x' D R U' R' D' R U R' D R U' R' D' R U R' x",
+      "description": "Menukar 2 pasang sudut yang saling berseberangan tanpa memutar edge.",
+      "fingerTricks": "Rotasi x' lalu D push presisi."
+    },
+    {
+      "id": "3x3_lbl_step2_corner",
+      "methodId": "lbl_3x3",
+      "group": "Langkah 2: Sudut Putih",
+      "name": "Memasukkan Sudut Putih (Sexy Move)",
+      "notation": "R U R' U'",
+      "setupMoves": "U R U' R'",
+      "description": "Letakkan sudut yang memiliki warna putih tepat di atas slotnya di kanan-depan, lalu ulangi R U R' U' 1 sampai 5 kali hingga putih menghadap bawah.",
+      "fingerTricks": "Gerakan 4 langkah paling fundamental di dunia Rubik."
+    },
+    {
+      "id": "3x3_lbl_step3_edge_right",
+      "methodId": "lbl_3x3",
+      "group": "Langkah 3: Layer Kedua",
+      "name": "Memasukkan Edge ke Kanan",
+      "notation": "U R U' R' U' F' U F",
+      "setupMoves": "F' U' F U R U R' U'",
+      "description": "Edge di layer atas tanpa warna kuning perlu dipindahkan ke layer 2 sebelah kanan. Jauhkan ke kiri dulu dengan U.",
+      "fingerTricks": "Pasangkan sudut dan edge di atas, lalu putar orientasi ke layer depan."
+    },
+    {
+      "id": "3x3_lbl_step3_edge_left",
+      "methodId": "lbl_3x3",
+      "group": "Langkah 3: Layer Kedua",
+      "name": "Memasukkan Edge ke Kiri",
+      "notation": "U' L' U L U F U' F'",
+      "setupMoves": "F U F' U' L' U' L U",
+      "description": "Edge di layer atas tanpa warna kuning perlu dipindahkan ke layer 2 sebelah kiri. Jauhkan ke kanan dulu dengan U'.",
+      "fingerTricks": "Mirror dari rumus edge kanan."
+    },
+    {
+      "id": "3x3_lbl_step4_cross",
+      "methodId": "lbl_3x3",
+      "group": "Langkah 4: Palang Kuning",
+      "name": "Membentuk Palang Kuning",
+      "notation": "F R U R' U' F'",
+      "setupMoves": "F R U R' U' F'",
+      "description": "Ubah titik kuning -> pola huruf L terbalik -> garis horizontal -> palang kuning (Yellow Cross).",
+      "fingerTricks": "Buka F dengan telunjuk kanan, 1 sexy move, tutup F' dengan jempol."
+    },
+    {
+      "id": "3x3_lbl_step5_sune",
+      "methodId": "lbl_3x3",
+      "group": "Langkah 5: Samakan Edge",
+      "name": "Menyamakan Warna Sisi Palang",
+      "notation": "R U R' U R U2 R' U",
+      "setupMoves": "U' R U2 R' U' R U' R'",
+      "description": "Posisikan 2 warna samping yang sudah cocok di sisi belakang dan kanan. Jalankan rumus Sune ini untuk menukar 2 edge lainnya.",
+      "fingerTricks": "Rumus Sune klasik yang menyelesaikan permutasi edge atas."
+    },
+    {
+      "id": "3x3_lbl_step6_niklas",
+      "methodId": "lbl_3x3",
+      "group": "Langkah 6: Posisi Sudut",
+      "name": "Menempatkan Sudut (Niklas)",
+      "notation": "U R U' L' U R' U' L",
+      "setupMoves": "L' U R U' L U R' U'",
+      "description": "Pindahkan 3 sudut yang belum tepat posisinya tanpa mengubah orientasi. Pegang 1 sudut yang sudah benar di kanan-depan.",
+      "fingerTricks": "Angkat layer kanan, ganti angkat layer kiri, lalu turunkan bergantian."
+    },
+    {
+      "id": "3x3_lbl_step7_finish",
+      "methodId": "lbl_3x3",
+      "group": "Langkah 7: Putar Sudut",
+      "name": "Menyelesaikan Kubus (R' D' R D)",
+      "notation": "R' D' R D R' D' R D",
+      "setupMoves": "D' R' D R D' R' D R",
+      "description": "Langkah penutup! Letakkan sudut kuning yang belum menghadap atas di depan-kanan. Lakukan R' D' R D 2 atau 4 kali hingga kuning menghadap atas. Putar U untuk sudut berikutnya!",
+      "fingerTricks": "Jangan pernah lupa gerakan 'D' penutup di setiap siklus agar kubus tidak berantakan!"
+    },
+    {
+      "id": "3x3_roux_cmll_sune",
+      "methodId": "roux",
+      "group": "Roux - CMLL",
+      "name": "CMLL Sune",
+      "notation": "R U R' U R U2 R'",
+      "setupMoves": "R U2 R' U' R U' R'",
+      "description": "Selesaikan 4 sudut atas tanpa mengubah 2 blok kiri dan kanan 1x2x3 yang sudah selesai.",
+      "fingerTricks": "Eksekusi Sune standar."
+    },
+    {
+      "id": "3x3_roux_lse_eo",
+      "methodId": "roux",
+      "group": "Roux - LSE",
+      "name": "LSE Step 4a - Orientasi Edge (EO)",
+      "notation": "M' U M' U2 M' U M'",
+      "setupMoves": "M' U' M U2 M' U' M'",
+      "description": "Orientasikan 6 edge yang tersisa menggunakan pergerakan layer tengah M dan layer atas U.",
+      "fingerTricks": "Gunakan jari manis kiri dari bawah untuk flick M' dan telunjuk untuk U."
+    },
+    {
+      "id": "3x3_roux_lse_ulur",
+      "methodId": "roux",
+      "group": "Roux - LSE",
+      "name": "LSE Step 4b - Memasukkan Edge UL & UR",
+      "notation": "M2 U2 M2",
+      "setupMoves": "M2 U2 M2",
+      "description": "Letakkan edge kiri-atas (UL) dan kanan-atas (UR) ke posisinya masing-masing dengan teknik M2.",
+      "fingerTricks": "Hanya kombinasi M2 dan U2!"
+    }
+  ]
+}

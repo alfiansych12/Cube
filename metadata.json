@@ -1,0 +1,6 @@
+{
+  "name": "RubikMaster",
+  "description": "Aplikasi interaktif belajar Rubik dari 2x2 hingga 5x5 dengan visualisasi 3D dinamis, modul algoritma (Ortega, CLL, EG-1), timer latihan, dan pelacakan progres.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

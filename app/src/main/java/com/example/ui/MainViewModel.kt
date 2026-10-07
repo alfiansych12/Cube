@@ -254,6 +254,15 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    fun toggleBookmark(algo: AlgorithmItem) {
+        vibrate(30)
+        viewModelScope.launch {
+            repository.toggleBookmark(algo.id, algo.methodId)
+            val updated = algo.copy(isBookmarked = !algo.isBookmarked)
+            _selectedAlgorithm.value = updated
+        }
+    }
+
     // Timer Controls
     fun onTimerTouchDown() {
         if (_timerState.value == TimerState.TIMING) {

@@ -23,6 +23,9 @@ interface AlgorithmMasteryDao {
     @Query("UPDATE algorithm_mastery SET isMastered = :isMastered WHERE algorithmId = :id")
     suspend fun updateMastered(id: String, isMastered: Boolean)
 
+    @Query("UPDATE algorithm_mastery SET isBookmarked = :isBookmarked WHERE algorithmId = :id")
+    suspend fun updateBookmarked(id: String, isBookmarked: Boolean)
+
     @Query("UPDATE algorithm_mastery SET practiceCount = practiceCount + 1, lastPracticedAt = :timestamp WHERE algorithmId = :id")
     suspend fun incrementPractice(id: String, timestamp: Long)
 }

@@ -48,6 +48,7 @@ data class AlgorithmItem(
     val fingerTricks: String = "",
     val moveCount: Int = 0,
     val isMastered: Boolean = false,
+    val isBookmarked: Boolean = false,
     val practiceCount: Int = 0
 )
 
@@ -56,6 +57,7 @@ data class AlgorithmMastery(
     @PrimaryKey val algorithmId: String,
     val methodId: String,
     val isMastered: Boolean = false,
+    val isBookmarked: Boolean = false,
     val practiceCount: Int = 0,
     val lastPracticedAt: Long = System.currentTimeMillis()
 )

@@ -198,6 +198,7 @@ class RubikRepository(private val context: Context) {
                 val mastery = masteryMap[algo.id]
                 algo.copy(
                     isMastered = mastery?.isMastered ?: false,
+                    isBookmarked = mastery?.isBookmarked ?: false,
                     practiceCount = mastery?.practiceCount ?: 0
                 )
             }
@@ -212,12 +213,31 @@ class RubikRepository(private val context: Context) {
                     algorithmId = algorithmId,
                     methodId = methodId,
                     isMastered = true,
+                    isBookmarked = false,
                     practiceCount = 1,
                     lastPracticedAt = System.currentTimeMillis()
                 )
             )
         } else {
             masteryDao.updateMastered(algorithmId, !existing.isMastered)
+        }
+    }
+
+    suspend fun toggleBookmark(algorithmId: String, methodId: String) = withContext(Dispatchers.IO) {
+        val existing = masteryDao.getMasteryById(algorithmId)
+        if (existing == null) {
+            masteryDao.insertOrUpdate(
+                AlgorithmMastery(
+                    algorithmId = algorithmId,
+                    methodId = methodId,
+                    isMastered = false,
+                    isBookmarked = true,
+                    practiceCount = 0,
+                    lastPracticedAt = System.currentTimeMillis()
+                )
+            )
+        } else {
+            masteryDao.updateBookmarked(algorithmId, !existing.isBookmarked)
         }
     }
 

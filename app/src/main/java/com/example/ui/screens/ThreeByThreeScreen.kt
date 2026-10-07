@@ -22,6 +22,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.AutoAwesome
+import androidx.compose.material.icons.filled.Bookmark
+import androidx.compose.material.icons.outlined.BookmarkBorder
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.PhotoCamera
 import androidx.compose.material.icons.filled.ViewInAr
@@ -41,7 +43,9 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -62,15 +66,23 @@ fun ThreeByThreeScreen(
     val selectedGroupFilter by viewModel.selectedGroupFilter3x3.collectAsState()
     val algorithms by viewModel.currentAlgorithms3x3.collectAsState()
 
+    var showOnlyBookmarked by remember { mutableStateOf(false) }
+
     val currentMethod = viewModel.methods3x3.find { it.id == selectedMethodId }
 
     val availableGroups = remember(algorithms) {
         algorithms.map { it.group }.distinct()
     }
 
-    val filteredAlgorithms = remember(algorithms, selectedGroupFilter) {
-        if (selectedGroupFilter.isNullOrBlank()) algorithms
-        else algorithms.filter { it.group == selectedGroupFilter }
+    val filteredAlgorithms = remember(algorithms, selectedGroupFilter, showOnlyBookmarked) {
+        var list = algorithms
+        if (showOnlyBookmarked) {
+            list = list.filter { it.isBookmarked }
+        }
+        if (!selectedGroupFilter.isNullOrBlank()) {
+            list = list.filter { it.group == selectedGroupFilter }
+        }
+        list
     }
 
     val methodTabs = listOf(
@@ -105,6 +117,13 @@ fun ThreeByThreeScreen(
                     }
                 },
                 actions = {
+                    IconButton(onClick = { showOnlyBookmarked = !showOnlyBookmarked }) {
+                        Icon(
+                            imageVector = if (showOnlyBookmarked) Icons.Default.Bookmark else Icons.Outlined.BookmarkBorder,
+                            contentDescription = "Rumus Disimpan",
+                            tint = if (showOnlyBookmarked) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
                     IconButton(onClick = { viewModel.navigateTo(Screen.CameraScanner) }) {
                         Icon(
                             imageVector = Icons.Default.PhotoCamera,
@@ -308,17 +327,30 @@ fun ThreeByThreeScreen(
                             horizontalArrangement = Arrangement.spacedBy(8.dp)
                         ) {
                             FilterChip(
-                                selected = selectedGroupFilter == null,
-                                onClick = { viewModel.setSelectedGroupFilter3x3(null) },
+                                selected = selectedGroupFilter == null && !showOnlyBookmarked,
+                                onClick = {
+                                    showOnlyBookmarked = false
+                                    viewModel.setSelectedGroupFilter3x3(null)
+                                },
                                 label = { Text("Semua (${algorithms.size})") },
                                 colors = FilterChipDefaults.filterChipColors()
+                            )
+
+                            FilterChip(
+                                selected = showOnlyBookmarked,
+                                onClick = { showOnlyBookmarked = !showOnlyBookmarked },
+                                label = { Text("Disimpan (${algorithms.count { it.isBookmarked }})") },
+                                leadingIcon = { Icon(Icons.Default.Bookmark, contentDescription = null, modifier = Modifier.size(14.dp)) }
                             )
 
                             availableGroups.forEach { group ->
                                 val count = algorithms.count { it.group == group }
                                 FilterChip(
-                                    selected = selectedGroupFilter == group,
-                                    onClick = { viewModel.setSelectedGroupFilter3x3(group) },
+                                    selected = selectedGroupFilter == group && !showOnlyBookmarked,
+                                    onClick = {
+                                        showOnlyBookmarked = false
+                                        viewModel.setSelectedGroupFilter3x3(group)
+                                    },
                                     label = { Text("$group ($count)") }
                                 )
                             }
@@ -331,7 +363,8 @@ fun ThreeByThreeScreen(
                     AlgorithmCard(
                         algorithm = algo,
                         onClick = { viewModel.navigateTo(Screen.AlgorithmDetail(algo.id)) },
-                        onToggleMastery = { viewModel.toggleMastery(algo) }
+                        onToggleMastery = { viewModel.toggleMastery(algo) },
+                        onToggleBookmark = { viewModel.toggleBookmark(algo) }
                     )
                 }
 

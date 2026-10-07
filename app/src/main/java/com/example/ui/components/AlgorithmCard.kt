@@ -12,6 +12,8 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Bookmark
+import androidx.compose.material.icons.outlined.BookmarkBorder
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.outlined.StarBorder
@@ -41,6 +43,7 @@ fun AlgorithmCard(
     algorithm: AlgorithmItem,
     onClick: () -> Unit,
     onToggleMastery: () -> Unit,
+    onToggleBookmark: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Card(
@@ -68,7 +71,7 @@ fun AlgorithmCard(
                     algorithm = algorithm
                 )
 
-                // Algorithm Info & Star Toggle
+                // Algorithm Info & Star / Bookmark Toggles
                 Column(modifier = Modifier.weight(1f)) {
                     Row(
                         modifier = Modifier.fillMaxWidth(),
@@ -82,15 +85,28 @@ fun AlgorithmCard(
                             color = MaterialTheme.colorScheme.onSurface
                         )
 
-                        IconButton(
-                            onClick = onToggleMastery,
-                            modifier = Modifier.size(36.dp)
-                        ) {
-                            Icon(
-                                imageVector = if (algorithm.isMastered) Icons.Default.Star else Icons.Outlined.StarBorder,
-                                contentDescription = if (algorithm.isMastered) "Dikuasai" else "Belum Dikuasai",
-                                tint = if (algorithm.isMastered) Color(0xFFEAB308) else MaterialTheme.colorScheme.onSurfaceVariant
-                            )
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            IconButton(
+                                onClick = onToggleBookmark,
+                                modifier = Modifier.size(32.dp)
+                            ) {
+                                Icon(
+                                    imageVector = if (algorithm.isBookmarked) Icons.Default.Bookmark else Icons.Outlined.BookmarkBorder,
+                                    contentDescription = if (algorithm.isBookmarked) "Disimpan" else "Simpan Rumus",
+                                    tint = if (algorithm.isBookmarked) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant
+                                )
+                            }
+
+                            IconButton(
+                                onClick = onToggleMastery,
+                                modifier = Modifier.size(32.dp)
+                            ) {
+                                Icon(
+                                    imageVector = if (algorithm.isMastered) Icons.Default.Star else Icons.Outlined.StarBorder,
+                                    contentDescription = if (algorithm.isMastered) "Dikuasai" else "Belum Dikuasai",
+                                    tint = if (algorithm.isMastered) Color(0xFFEAB308) else MaterialTheme.colorScheme.onSurfaceVariant
+                                )
+                            }
                         }
                     }
 

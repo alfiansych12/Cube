@@ -69,9 +69,9 @@ fun RubikGridOverlay(
         val canvasHeight = size.height
 
         // Calculate a responsive square bounding box for the 3x3 Rubik face
-        val boxSize = min(canvasWidth * 0.82f, canvasHeight * 0.55f)
+        val boxSize = min(canvasWidth * 0.78f, canvasHeight * 0.48f)
         val boxLeft = (canvasWidth - boxSize) / 2f
-        val boxTop = (canvasHeight - boxSize) / 2f - (canvasHeight * 0.04f)
+        val boxTop = (canvasHeight - boxSize) / 2f - (canvasHeight * 0.15f)
         val boxRight = boxLeft + boxSize
         val boxBottom = boxTop + boxSize
 

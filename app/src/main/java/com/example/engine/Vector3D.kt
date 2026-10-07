@@ -78,8 +78,8 @@ enum class RubikColor(val displayName: String, val color: Color, val hex: String
     WHITE("Putih (D)", Color(0xFFF8FAFC), "#F8FAFC"),
     GREEN("Hijau (F)", Color(0xFF22C55E), "#22C55E"),
     BLUE("Biru (B)", Color(0xFF2563EB), "#2563EB"),
-    RED("Merah (R)", Color(0xFFEF4444), "#EF4444"),
-    ORANGE("Oranye (L)", Color(0xFFF97316), "#F97316"),
+    ORANGE("Oranye (R)", Color(0xFFF97316), "#F97316"),
+    RED("Merah (L)", Color(0xFFEF4444), "#EF4444"),
     CORE("Core", Color(0xFF1E293B), "#1E293B");
 
     companion object {
@@ -92,8 +92,8 @@ enum class RubikColor(val displayName: String, val color: Color, val hex: String
                 ny < -0.6f -> WHITE
                 nz > 0.6f -> GREEN
                 nz < -0.6f -> BLUE
-                nx > 0.6f -> RED
-                nx < -0.6f -> ORANGE
+                nx > 0.6f -> ORANGE
+                nx < -0.6f -> RED
                 else -> CORE
             }
         }

@@ -35,6 +35,7 @@ sealed class Screen {
     data object FreePlay3D : Screen()
     data object Progress : Screen()
     data class RoadmapDetail(val cube: String) : Screen()
+    data object CameraScanner : Screen()
 }
 
 enum class TimerState {
@@ -358,6 +359,14 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         } else {
             CubeState2x2.generate2x2Scramble()
         }
+    }
+
+    fun triggerHapticFeedback(durationMillis: Long = 40L) {
+        vibrate(durationMillis)
+    }
+
+    fun selectAlgorithm(algorithm: AlgorithmItem) {
+        _selectedAlgorithm.value = algorithm
     }
 
     private fun vibrate(durationMillis: Long) {

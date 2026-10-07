@@ -162,6 +162,21 @@ class RubikRepository(private val context: Context) {
         return cachedAlgorithms.find { it.id == id }
     }
 
+    fun getAlgorithms(methodId: String? = null, cubeType: String? = null): List<AlgorithmItem> {
+        var filtered = cachedAlgorithms.toList()
+        if (!cubeType.isNullOrBlank()) {
+            filtered = if (cubeType == "3x3") {
+                filtered.filter { it.id.startsWith("3x3") }
+            } else {
+                filtered.filter { !it.id.startsWith("3x3") }
+            }
+        }
+        if (!methodId.isNullOrBlank()) {
+            filtered = filtered.filter { it.methodId.equals(methodId, ignoreCase = true) }
+        }
+        return filtered
+    }
+
     fun getAlgorithmsFlow(methodId: String? = null, cubeType: String? = null): Flow<List<AlgorithmItem>> {
         return masteryDao.getAllMastery().map { masteryList ->
             val masteryMap = masteryList.associateBy { it.algorithmId }

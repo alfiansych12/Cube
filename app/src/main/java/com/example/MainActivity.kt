@@ -63,7 +63,8 @@ fun MainAppContent(viewModel: MainViewModel) {
     val isSubScreen = currentScreen is Screen.AlgorithmDetail ||
             currentScreen is Screen.RoadmapDetail ||
             currentScreen is Screen.ThreeByThree ||
-            currentScreen is Screen.TwoByTwo
+            currentScreen is Screen.TwoByTwo ||
+            currentScreen is Screen.CameraScanner
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -122,6 +123,9 @@ fun MainAppContent(viewModel: MainViewModel) {
             }
             is Screen.RoadmapDetail -> {
                 RoadmapDetailScreen(cube = screen.cube, viewModel = viewModel, modifier = Modifier.padding(innerPadding))
+            }
+            is Screen.CameraScanner -> {
+                com.example.ui.screens.CameraScannerScreen(viewModel = viewModel, modifier = Modifier.padding(innerPadding))
             }
         }
     }

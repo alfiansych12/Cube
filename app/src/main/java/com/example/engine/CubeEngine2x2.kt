@@ -133,9 +133,9 @@ class CubeState2x2 private constructor(val cubies: List<Cubie>) {
 
                         // Right (+X) / Left (-X)
                         if (x > 0) {
-                            stickers.add(Sticker(Vector3D(1f, 0f, 0f), Vector3D(1f, 0f, 0f), RubikColor.RED))
+                            stickers.add(Sticker(Vector3D(1f, 0f, 0f), Vector3D(1f, 0f, 0f), RubikColor.ORANGE))
                         } else {
-                            stickers.add(Sticker(Vector3D(-1f, 0f, 0f), Vector3D(-1f, 0f, 0f), RubikColor.ORANGE))
+                            stickers.add(Sticker(Vector3D(-1f, 0f, 0f), Vector3D(-1f, 0f, 0f), RubikColor.RED))
                         }
 
                         // Front (+Z) / Back (-Z)

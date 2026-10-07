@@ -95,11 +95,11 @@ class CubeState4x4 private constructor(val cubies: List<Cubie>) {
                             stickers.add(Sticker(Vector3D(0f, -1f, 0f), Vector3D(0f, -1f, 0f), RubikColor.WHITE))
                         }
 
-                        // Right (+X) = Red / Left (-X) = Orange
+                        // Right (+X) = Orange / Left (-X) = Red
                         if (x > 1.0f) {
-                            stickers.add(Sticker(Vector3D(1f, 0f, 0f), Vector3D(1f, 0f, 0f), RubikColor.RED))
+                            stickers.add(Sticker(Vector3D(1f, 0f, 0f), Vector3D(1f, 0f, 0f), RubikColor.ORANGE))
                         } else if (x < -1.0f) {
-                            stickers.add(Sticker(Vector3D(-1f, 0f, 0f), Vector3D(-1f, 0f, 0f), RubikColor.ORANGE))
+                            stickers.add(Sticker(Vector3D(-1f, 0f, 0f), Vector3D(-1f, 0f, 0f), RubikColor.RED))
                         }
 
                         // Front (+Z) = Green / Back (-Z) = Blue
